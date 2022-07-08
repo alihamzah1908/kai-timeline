@@ -157,6 +157,17 @@
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 <script>
     // PROGRAM & REALIZATION
+    var seriesData = [];
+    seriesData.push({
+        name: "Program",
+        data: [28, 21],
+        url: "{{ route('task.approval') }}"
+    });
+    seriesData.push({
+        name: "Realization",
+        data: [19, 10],
+        url: "{{ route('task.approval') }}"
+    });
     Highcharts.chart('container', {
         chart: {
             type: 'bar'
@@ -204,16 +215,27 @@
             backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF',
             shadow: true
         },
-        credits: {
-            enabled: false
+        plotOptions: {
+            series: {
+                cursor: 'pointer',
+                point: {
+                    events: {
+                        click: function() {
+                            var point = this;
+
+                            if (point.url) {
+                                window.open(point.url);
+                            } else if (point.series.userOptions.url) {
+                                window.open(point.series.userOptions.url);
+                            }
+                        }
+                    }
+                }
+
+            }
+
         },
-        series: [{
-            name: 'Program',
-            data: [107, 109]
-        }, {
-            name: 'Realization',
-            data: [133, 156]
-        }]
+        series: seriesData
     });
 
     // PROGRAM & REALIZATION PBJ OPEX
