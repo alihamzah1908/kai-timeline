@@ -205,7 +205,7 @@
                             <i data-feather="user" class="icon-dual icon-xs mr-2"></i>
                             <span>My Account</span>
                         </a>
-                        <a href="{{ route('login') }}" class="dropdown-item notify-item">
+                        <a href="{{ route('logout') }}" class="dropdown-item notify-item">
                             <i data-feather="log-out" class="icon-dual icon-xs mr-2"></i>
                             <span>Logout</span>
                         </a>

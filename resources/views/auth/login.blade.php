@@ -37,19 +37,20 @@
                                     </div>
 
                                     <h6 class="h5 mb-0 mt-4">Welcome back!</h6>
-                                    <p class="text-muted mt-1 mb-4">Enter your email address and password to
+                                    <p class="text-muted mt-1 mb-4">Enter your username and password to
                                         access admin panel.</p>
 
-                                    <form action="{{ route('home') }}" class="authentication-form">
+                                    <form action="{{ route('process.login') }}" class="authentication-form" method="post">
+                                        @csrf
                                         <div class="form-group">
-                                            <label class="form-control-label">Email Address</label>
+                                            <label class="form-control-label">Username</label>
                                             <div class="input-group input-group-merge">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text">
                                                         <i class="icon-dual" data-feather="mail"></i>
                                                     </span>
                                                 </div>
-                                                <input type="email" class="form-control" id="email" placeholder="hello@coderthemes.com" required>
+                                                <input type="text" class="form-control" name="username" id="username" placeholder="Enter your username" required>
                                             </div>
                                         </div>
 
@@ -62,7 +63,7 @@
                                                         <i class="icon-dual" data-feather="lock"></i>
                                                     </span>
                                                 </div>
-                                                <input type="password" class="form-control" id="password" placeholder="Enter your password" required>
+                                                <input type="password" name="password" class="form-control" id="password" placeholder="Enter your password" required>
                                             </div>
                                         </div>
 
