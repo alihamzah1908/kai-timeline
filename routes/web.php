@@ -27,7 +27,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/users/store', 'Users\UserController@store')->name('users.store');
     
     // ROLES
-    Route::get('/roles', 'Auth\RoleController@index')->name('roles.index');
+    Route::get('/roles', 'Auth\RoleController@index')->middleware('role:admin')->name('roles.index');
     Route::get('/roles/create', 'Auth\RoleController@create')->name('roles.create');
     Route::get('/roles/{id}', 'Auth\RoleController@show')->name('roles.show');
     Route::post('/roles/store', 'Auth\RoleController@store')->name('roles.store');
