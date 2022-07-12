@@ -35,13 +35,13 @@
                 <div class="card-body p-0">
                     <div class="media p-3">
                         <div class="media-body">
-                            <span class="text-muted text-uppercase font-size-12 font-weight-bold">Today
-                                Revenue</span>
-                            <h2 class="mb-0">$2189</h2>
+                            <span class="text-muted text-uppercase font-size-12 font-weight-bold">Total
+                                RKAP</span>
+                            <h5 class="mb-0">Rp. 2.189</h5>
                         </div>
                         <div class="align-self-center">
                             <div id="today-revenue-chart" class="apex-charts"></div>
-                            <span class="text-success font-weight-bold font-size-13"><i class='uil uil-arrow-up'></i> 10.21%</span>
+                            <!-- <span class="text-success font-weight-bold font-size-13"><i class='uil uil-arrow-up'></i> 10.21%</span> -->
                         </div>
                     </div>
                 </div>
@@ -53,9 +53,9 @@
                 <div class="card-body p-0">
                     <div class="media p-3">
                         <div class="media-body">
-                            <span class="text-muted text-uppercase font-size-12 font-weight-bold">Product
-                                Sold</span>
-                            <h2 class="mb-0">1065</h2>
+                            <span class="text-muted text-uppercase font-size-12 font-weight-bold">Total
+                                Realization</span>
+                            <h5 class="mb-0">Rp. 1.065</h5>
                         </div>
                         <div class="align-self-center">
                             <div id="today-product-sold-chart" class="apex-charts"></div>
@@ -71,9 +71,9 @@
                 <div class="card-body p-0">
                     <div class="media p-3">
                         <div class="media-body">
-                            <span class="text-muted text-uppercase font-size-12 font-weight-bold">New
-                                Customers</span>
-                            <h2 class="mb-0">11</h2>
+                            <span class="text-muted text-uppercase font-size-12 font-weight-bold">Project
+                                Completed</span>
+                            <h5 class="mb-0">11</h5>
                         </div>
                         <div class="align-self-center">
                             <div id="today-new-customer-chart" class="apex-charts"></div>
@@ -89,9 +89,9 @@
                 <div class="card-body p-0">
                     <div class="media p-3">
                         <div class="media-body">
-                            <span class="text-muted text-uppercase font-size-12 font-weight-bold">New
-                                Visitors</span>
-                            <h2 class="mb-0">750</h2>
+                            <span class="text-muted text-uppercase font-size-12 font-weight-bold">Project
+                                In Progress</span>
+                            <h5 class="mb-0">750</h5>
                         </div>
                         <div class="align-self-center">
                             <div id="today-new-visitors-chart" class="apex-charts"></div>

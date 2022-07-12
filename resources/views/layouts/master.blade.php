@@ -216,18 +216,16 @@
                 <!--- Sidemenu -->
                 <div id="sidebar-menu" class="slimscroll-menu">
                     <ul class="metismenu" id="menu-bar">
-                        <li class="menu-title">Analytics</li>
                         <li>
                             <a href="{{ route('home') }}">
                                 <i data-feather="home"></i>
                                 <span> Dashboard </span>
                             </a>
                         </li>
-                        <li class="menu-title">User Management</li>
                         <li>
                             <a href="javascript: void(0);">
                                 <i data-feather="users"></i>
-                                <span> Users </span>
+                                <span> Management Users </span>
                                 <span class="menu-arrow"></span>
                             </a>
 
@@ -240,7 +238,7 @@
                         <li>
                             <a href="javascript: void(0);">
                                 <i data-feather="users"></i>
-                                <span> Roles </span>
+                                <span> Management Roles </span>
                                 <span class="menu-arrow"></span>
                             </a>
 
@@ -250,7 +248,6 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="menu-title">Data</li>
                         <li>
                             <a href="javascript: void(0);">
                                 <i data-feather="bookmark"></i>
@@ -260,10 +257,10 @@
 
                             <ul class="nav-second-level" aria-expanded="false">
                                 <li>
-                                    <a href="{{ route('task.approval') }}">Task Approval</a>
+                                    <a href="{{ route('list.timeline') }}">List Timeline</a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('list.timeline') }}">List Timeline</a>
+                                    <a href="{{ route('task.approval') }}">Task Approval</a>
                                 </li>
                             </ul>
                         </li>
@@ -276,10 +273,58 @@
 
                             <ul class="nav-second-level" aria-expanded="false">
                                 <li>
-                                    <a href="{{ route('sp3.task.approval') }}">Task Approval</a>
+                                    <a href="{{ route('list.sp3') }}">List SP3</a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('list.sp3') }}">List SP3</a>
+                                    <a href="{{ route('sp3.task.approval') }}">Task Approval</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript: void(0);">
+                                <i data-feather="bookmark"></i>
+                                <span> Procurement </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+
+                            <ul class="nav-second-level" aria-expanded="false">
+                                <li>
+                                    <a href="javascript:void(0)">Task Procurement</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)">History Procurement</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript: void(0);">
+                                <i data-feather="bookmark"></i>
+                                <span> Warehouse </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+
+                            <ul class="nav-second-level" aria-expanded="false">
+                                <li>
+                                    <a href="javascript:void(0)">Card</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)">Spare Part</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)">Waste</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript: void(0);">
+                                <i data-feather="bookmark"></i>
+                                <span> Vendor Management </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+
+                            <ul class="nav-second-level" aria-expanded="false">
+                                <li>
+                                    <a href="javascript:void(0)">List Vendor</a>
                                 </li>
                             </ul>
                         </li>
