@@ -31,7 +31,7 @@
                                 <div class="col-md-6 p-5">
                                     <div class="mx-auto mb-5">
                                         <a href="index.html">
-                                            <img src="assets/images/logo-kai-icon.png" alt="" height="100" />
+                                            <img src="{{ asset('assets/images/Logo_KAI_Commuter.svg.png') }}" alt="" height="70" />
                                             <h3 class="d-inline align-middle ml-1 text-logo"></h3>
                                         </a>
                                     </div>
