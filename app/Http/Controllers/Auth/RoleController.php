@@ -1,14 +1,25 @@
 <?php
 
-namespace App\Http\Controllers\Users;
+namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Spatie\Permission\Models\Role;
 use Illuminate\Http\Request;
-use Hash;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+use DB;
+use Illuminate\Support\Facades\Auth;
 
-class UserController extends Controller
+class RoleController extends Controller
 {
+
+    function __construct()
+    {
+        // $this->middleware('permission:role-list|role-create|role-edit|role-delete', ['only' => ['index', 'store']]);
+        // $this->middleware('permission:role-create', ['only' => ['create', 'store']]);
+        // $this->middleware('permission:role-edit', ['only' => ['edit', 'update']]);
+        // $this->middleware('permission:role-delete', ['only' => ['destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -16,8 +27,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        $data["data"] = \App\Models\User::all();
-        return view('users.index', $data);
+        $data["roles"] = Role::orderBy('id', 'DESC')
+            ->get();
+        return view('roles.index', $data);
     }
 
     /**
@@ -27,8 +39,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        $data["roles"] = Role::pluck('name','name')->all();
-        return view('users.form', $data);
+        $data["permission"] = Permission::get();
+        return view('roles.form', $data);
     }
 
     /**
@@ -39,12 +51,11 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $input = $request->all();
-        $input['password'] = Hash::make($input['password']);
-        $user = \App\Models\User::create($input);
-
-        $user->assignRole($request->input('roles'));
-        return redirect(route('users.index'));
+        $role = new Role();
+        $role->name = $request["name"];
+        $role->syncPermissions($request["permission"]);
+        $role->save();
+        return redirect(route('roles.index'));
     }
 
     /**
@@ -55,7 +66,11 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $role = Role::find($id);
+        $rolePermissions = Permission::join("role_has_permissions", "role_has_permissions.permission_id", "=", "permissions.id")
+            ->where("role_has_permissions.role_id", $id)
+            ->get();
+        dd($rolePermissions);
     }
 
     /**
