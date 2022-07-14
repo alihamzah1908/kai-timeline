@@ -2269,7 +2269,8 @@ pre code {
     width: 100%;
     height: calc(1.5em + 1rem + 2px);
     padding: .5rem .75rem;
-    font-size: .875rem;
+    /* font-size: .875rem; */
+    font-size: .675rem;
     font-weight: 400;
     line-height: 1.5;
     color: #4b4b5a;
