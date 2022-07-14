@@ -193,7 +193,7 @@
                 <img src="{{ asset('assets/images/users/avatar-7.jpg') }}" class="avatar-xs rounded-circle mr-2" alt="Shreyu" />
 
                 <div class="media-body">
-                    <h6 class="pro-user-name mt-0 mb-0">{{ ucfirst(Auth::user()->username) }}</h6>
+                    <h6 class="pro-user-name font-size-12 mt-0 mb-0">{{ ucfirst(Auth::user()->username) }}</h6>
                     <span class="pro-user-desc">{{ ucfirst(Auth::user()->name) }}</span>
                 </div>
                 <div class="dropdown align-self-center profile-dropdown-menu">

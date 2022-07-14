@@ -1,9 +1,14 @@
 @extends('layouts.master')
 @section('content')
+<style>
+    .highcharts-figure {
+        height: 400px;
+    }
+</style>
 <div class="container-fluid">
     <div class="row page-title align-items-center">
         <div class="col-sm-4 col-xl-6">
-            <h4 class="mb-1 mt-0">Dashboard Summary</h4>
+            <h5 class="mb-1 mt-0">Dashboard Summary</h4>
         </div>
         <div class="col-sm-8 col-xl-6">
             <form class="form-inline float-sm-right mt-3 mt-sm-0">
@@ -35,9 +40,9 @@
                 <div class="card-body p-0">
                     <div class="media p-3">
                         <div class="media-body">
-                            <span class="text-muted text-uppercase font-size-12 font-weight-bold">Total
+                            <span class="text-muted text-uppercase font-size-9 font-weight-bold">Total
                                 RKAP</span>
-                            <h5 class="mb-0">Rp. 2.189</h5>
+                            <h6 class="mb-0">Rp. 2.189</h6>
                         </div>
                         <div class="align-self-center">
                             <div id="today-revenue-chart" class="apex-charts"></div>
@@ -53,9 +58,9 @@
                 <div class="card-body p-0">
                     <div class="media p-3">
                         <div class="media-body">
-                            <span class="text-muted text-uppercase font-size-12 font-weight-bold">Total
+                            <span class="text-muted text-uppercase font-size-9 font-weight-bold">Total
                                 Realization</span>
-                            <h5 class="mb-0">Rp. 1.065</h5>
+                            <h6 class="mb-0">Rp. 1.065</h6>
                         </div>
                         <div class="align-self-center">
                             <div id="today-product-sold-chart" class="apex-charts"></div>
@@ -71,9 +76,9 @@
                 <div class="card-body p-0">
                     <div class="media p-3">
                         <div class="media-body">
-                            <span class="text-muted text-uppercase font-size-12 font-weight-bold">Project
+                            <span class="text-muted text-uppercase font-size-9 font-weight-bold">Project
                                 Completed</span>
-                            <h5 class="mb-0">11</h5>
+                            <h6 class="mb-0">11</h6>
                         </div>
                         <div class="align-self-center">
                             <div id="today-new-customer-chart" class="apex-charts"></div>
@@ -89,9 +94,9 @@
                 <div class="card-body p-0">
                     <div class="media p-3">
                         <div class="media-body">
-                            <span class="text-muted text-uppercase font-size-12 font-weight-bold">Project
+                            <span class="text-muted text-uppercase font-size-9 font-weight-bold">Project
                                 In Progress</span>
-                            <h5 class="mb-0">750</h5>
+                            <h6 class="mb-0">750</h6>
                         </div>
                         <div class="align-self-center">
                             <div id="today-new-visitors-chart" class="apex-charts"></div>

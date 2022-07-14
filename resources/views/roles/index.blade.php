@@ -11,7 +11,7 @@
                         </div>
                         <div class="col-md-6 d-flex justify-content-end">
                             <a href="{{ route('roles.create') }}">
-                                <button type="button" class="d-flex justify-content-end btn btn-success btn-sm btn-rounded">Add Roles</button>
+                                <button type="button" class="d-flex justify-content-end btn btn-success btn-sm btn-rounded"><i class="uil-plus-circle"></i> &nbsp; Add Roles</button>
                             </a>
                         </div>
                     </div>

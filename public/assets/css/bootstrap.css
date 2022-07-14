@@ -9011,3 +9011,7 @@ p {
 .text-unline-dashed {
   border-bottom: #ced4da 1px dashed !important;
   padding-bottom: 1px; }
+
+  /* CUSTOME CSS */
+  .font-size-9 {
+    font-size: 9px !important; }
