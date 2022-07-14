@@ -11,6 +11,8 @@
 
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ asset('assets/images/logo-kai-icon.png') }}">
+    <!-- Summernote css -->
+    <link href="{{ asset('assets/libs/summernote/summernote-bs4.css') }}" rel="stylesheet" />
 
     <!-- plugins -->
     <link href="{{ asset('assets/libs/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
@@ -438,6 +440,11 @@
 
     <!-- App js -->
     <script src="{{ asset('assets/js/app.min.js') }}"></script>
+    <!--Summernote js-->
+    <script src="{{ asset('assets/libs/summernote/summernote-bs4.min.js') }}"></script>
+
+    <!-- Init js -->
+    <script src="{{ asset('assets/js/pages/form-editor.init.js') }}"></script>
     @stack('scripts')
 
 </body>

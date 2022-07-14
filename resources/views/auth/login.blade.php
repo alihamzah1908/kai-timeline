@@ -24,7 +24,7 @@
     <div class="account-pages my-5">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-xl-10">
+                <div class="col-xl-10 font-size-12">
                     <div class="card">
                         <div class="card-body p-0">
                             <div class="row">

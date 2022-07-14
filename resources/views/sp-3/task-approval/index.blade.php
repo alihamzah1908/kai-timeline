@@ -5,12 +5,11 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="header-title mt-0 mb-1">Task Approval SP 3</h4>
-                    <p class="sub-header">
-                        DataTables has most features enabled by default, so all you need to do to use it with your own tables is to call the construction
-                        function:
-                        <code>$().DataTable();</code>.
-                    </p>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <h4 class="header-title mt-0 mb-1">Task Approval SP 3</h4>
+                        </div>
+                    </div>
 
                     <table id="basic-datatable" class="table dt-responsive nowrap">
                         <thead>
@@ -27,7 +26,6 @@
                                 <th>Metode</th>
                                 <th>PBJ</th>
                                 <th>Keterangan</th>
-                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -47,20 +45,6 @@
                                 <td>LELANG TERBUKA</td>
                                 <td>SARANA</td>
                                 <td>-</td>
-                                <td>
-                                    <div class="dropdown">
-                                        <button class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="true" type="button">Action
-                                            <i class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down">
-                                                    <polyline points="6 9 12 15 18 9"></polyline>
-                                                </svg></i>
-                                            <div></div>
-                                        </button>
-                                        <div class="dropdown-menu" role="menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 28px, 0px); top: 0px; left: 0px; will-change: transform;">
-                                            <a class="dropdown-item" role="presentation" href="javascript:void(0)"> <i class="uil uil-check"></i> Approve</a>
-                                            <a class="dropdown-item" role="presentation" href="javascript:void(0)"> <i class="uil uil-multiply"></i> Reject</a>
-                                        </div>
-                                    </div>
-                                </td>
                                 </tr>
                                 @endfor
                         </tbody>
