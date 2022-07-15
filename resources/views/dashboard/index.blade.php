@@ -165,13 +165,27 @@
     var seriesData = [];
     seriesData.push({
         name: "Program",
-        data: [28, 21],
-        url: "{{ route('task.approval') }}"
+        data: [{
+            y: 19,
+            color: 'red'
+        }, {
+            y: 21,
+            color: 'red'
+        }],
+        url: "{{ route('task.approval') }}",
+        color: 'red'
     });
     seriesData.push({
         name: "Realization",
-        data: [19, 10],
-        url: "{{ route('task.approval') }}"
+        data: [{
+            y: 16,
+            color: 'orange'
+        }, {
+            y: 18,
+            color: 'orange'
+        }],
+        url: "{{ route('task.approval') }}",
+        color: 'orange'
     });
     Highcharts.chart('container', {
         chart: {
@@ -207,7 +221,7 @@
                 dataLabels: {
                     enabled: true
                 }
-            }
+            },
         },
         legend: {
             layout: 'vertical',
@@ -222,6 +236,7 @@
         },
         plotOptions: {
             series: {
+                borderRadius: 15,
                 cursor: 'pointer',
                 point: {
                     events: {
@@ -285,6 +300,9 @@
             useHTML: true
         },
         plotOptions: {
+            series: {
+                borderRadius: 3,
+            },
             column: {
                 pointPadding: 0.2,
                 borderWidth: 0
@@ -292,12 +310,75 @@
         },
         series: [{
             name: 'Program',
-            data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6]
+            color: 'red',
+            data: [{
+                y: 49.9,
+                color: 'red'
+            }, {
+                y: 71.5,
+                color: 'red'
+            }, {
+                y: 106.4,
+                color: 'red'
+            }, {
+                y: 129.2,
+                color: 'red'
+            }, {
+                y: 144.0,
+                color: 'red'
+            }, {
+                y: 135.6,
+                color: 'red'
+            }, {
+                y: 148.5,
+                color: 'red'
+            }, {
+                y: 216.4,
+                color: 'red'
+            }, {
+                y: 194.1,
+                color: 'red'
+            }, {
+                y: 95.6,
+                color: 'red'
+            }],
 
         }, {
             name: 'Realization',
-            data: [83.6, 78.8, 98.5, 93.4, 106.0, 84.5, 105.0, 104.3, 91.2, 83.5, 106.6]
-
+            color: 'orange',
+            data: [{
+                    y: 83.6,
+                    color: 'orange'
+                },
+                {
+                    y: 78.8,
+                    color: 'orange'
+                }, {
+                    y: 93.4,
+                    color: 'orange'
+                }, {
+                    y: 98.5,
+                    color: 'orange'
+                }, {
+                    y: 106.0,
+                    color: 'orange'
+                }, {
+                    y: 84.5,
+                    color: 'orange'
+                }, {
+                    y: 105.0,
+                    color: 'orange'
+                }, {
+                    y: 91.2,
+                    color: 'orange'
+                }, {
+                    y: 83.5,
+                    color: 'orange'
+                }, {
+                    y: 106.6,
+                    color: 'orange'
+                }
+            ]
         }]
     });
 
@@ -343,6 +424,9 @@
             useHTML: true
         },
         plotOptions: {
+            series: {
+                borderRadius: 3
+            },
             column: {
                 pointPadding: 0.2,
                 borderWidth: 0
@@ -350,12 +434,75 @@
         },
         series: [{
             name: 'Program',
-            data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6]
+            color: '#3385ff',
+            data: [{
+                    y: 83.6,
+                    color: '#3385ff'
+                },
+                {
+                    y: 78.8,
+                    color: '#3385ff'
+                }, {
+                    y: 93.4,
+                    color: '#3385ff'
+                }, {
+                    y: 98.5,
+                    color: '#3385ff'
+                }, {
+                    y: 106.0,
+                    color: '#3385ff'
+                }, {
+                    y: 84.5,
+                    color: '#3385ff'
+                }, {
+                    y: 105.0,
+                    color: '#3385ff'
+                }, {
+                    y: 91.2,
+                    color: '#3385ff'
+                }, {
+                    y: 83.5,
+                    color: '#3385ff'
+                }, {
+                    y: 106.6,
+                    color: '#3385ff'
+                }
+            ]
 
         }, {
             name: 'Realization',
-            data: [83.6, 78.8, 98.5, 93.4, 106.0, 84.5, 105.0, 104.3, 91.2, 83.5, 106.6]
-
+            color: '#47d147',
+            data: [{
+                y: 49.9,
+                color: '#47d147'
+            }, {
+                y: 71.5,
+                color: '#47d147'
+            }, {
+                y: 106.4,
+                color: '#47d147'
+            }, {
+                y: 129.2,
+                color: '#47d147'
+            }, {
+                y: 144.0,
+                color: '#47d147'
+            }, {
+                y: 135.6,
+                color: '#47d147'
+            }, {
+                y: 148.5,
+                color: '#47d147'
+            }, {
+                y: 216.4,
+                color: '#47d147'
+            }, {
+                y: 194.1,
+                color: '#47d147'
+            }, {
+                y: 95.6,
+                color: '#47d147'
+            }],
         }]
     });
 
@@ -390,6 +537,9 @@
             valueSuffix: ' total'
         },
         plotOptions: {
+            series: {
+                borderRadius: 10
+            },
             bar: {
                 dataLabels: {
                     enabled: true
@@ -412,13 +562,40 @@
         },
         series: [{
             name: 'Penunjukan Langsung',
-            data: [18, 1, 18]
+            data: [{
+                y: 18,
+                color: "#47d147",
+            }, {
+                y: 1,
+                color: "#47d147",
+            }, {
+                y: 18,
+                color: "#47d147",
+            }]
         }, {
             name: 'Pemilihan Langsung',
-            data: [133, 156, 200]
+            data: [{
+                y: 100,
+                color: "red",
+            }, {
+                y: 50,
+                color: "red",
+            }, {
+                y: 116,
+                color: "red",
+            }]
         }, {
             name: 'Pelelangan Terbuka',
-            data: [133, 156, 200]
+            data: [{
+                y: 200,
+                color: "orange",
+            }, {
+                y: 150,
+                color: "orange",
+            }, {
+                y: 230,
+                color: "orange",
+            }]
         }]
     });
 
@@ -463,11 +640,13 @@
             data: [{
                     name: "PBJ Sarana",
                     y: 62.74,
+                    color: 'red',
                     drilldown: "PBJ Sarana"
                 },
                 {
                     name: "PBJ Non Sarana",
                     y: 10.57,
+                    color: 'orange',
                     drilldown: "PBJ Non Sarana"
                 }
             ]
@@ -525,36 +704,43 @@
             data: [{
                     name: "Chrome",
                     y: 62.74,
+                    color: '#ff3300',
                     drilldown: "Chrome"
                 },
                 {
                     name: "Firefox",
                     y: 10.57,
+                    color: '#ff3300',
                     drilldown: "Firefox"
                 },
                 {
                     name: "Internet Explorer",
                     y: 7.23,
+                    color: '#ff3300',
                     drilldown: "Internet Explorer"
                 },
                 {
                     name: "Safari",
                     y: 5.58,
+                    color: '#ff3300',
                     drilldown: "Safari"
                 },
                 {
                     name: "Edge",
                     y: 4.02,
+                    color: '#ff3300',
                     drilldown: "Edge"
                 },
                 {
                     name: "Opera",
                     y: 1.92,
+                    color: '#ff3300',
                     drilldown: "Opera"
                 },
                 {
                     name: "Other",
                     y: 7.62,
+                    color: '#ff3300',
                     drilldown: null
                 }
             ]
