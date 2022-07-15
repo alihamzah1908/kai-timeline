@@ -92,7 +92,7 @@
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Uraian</label>
                                 <div id="summernote-editor">
-                                    <p>Please insert uraian</p>
+                                    <p>Uraian Details</p>
                                 </div> <!-- end summernote-editor-->
                             </div>
                         </div>
@@ -104,17 +104,28 @@
                                 <input type="text" class="form-control" placeholder="Please insert direktorat" name="direktorat">
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <!-- <div class="col-md-6">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Realisasi</label>
                                 <input type="text" class="form-control" placeholder="Please insert direktorat" name="realisasi">
+                            </div>
+                        </div> -->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Metode</label>
+                                <select class="form-control" name="test">
+                                    <option value="1">Penunjukan Langsung</option>
+                                    <option value="2">Pemilihan Langsung</option>
+                                    <option value="3">Pelelangan Terbuka</option>
+                                </select>
+                                <!-- <input type="text" class="form-control" placeholder="Please insert metode" name="metode"> -->
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Nilai RKAP</label>
+                                <label for="exampleInputEmail1">Nilai RUP</label>
                                 <input type="text" class="form-control" placeholder="Please insert nilai rkap" name="nilai_rkap">
                             </div>
                         </div>
@@ -125,7 +136,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">No SP 3</label>
@@ -138,21 +149,7 @@
                                 <input type="text" class="form-control" placeholder="Please insert tgl sp 3" name="tgl_sp_3">
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Metode</label>
-                                <input type="text" class="form-control" placeholder="Please insert metode" name="metode">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">PBJ</label>
-                                <input type="text" class="form-control" placeholder="Please insert pbj" name="pbj">
-                            </div>
-                        </div>
-                    </div>
+                    </div> -->
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -160,6 +157,54 @@
                                 <textarea class="form-control" placeholder="Please insert keterangan"></textarea>
                             </div>
                         </div>
+                        <!-- <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Metode</label>
+                                <input type="text" class="form-control" placeholder="Please insert metode" name="metode">
+                            </div>
+                        </div> -->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">PBJ</label>
+                                <select class="form-control" name="test">
+                                    <option value="1">Sarana</option>
+                                    <option value="2">Non Sarana</option>
+                                </select>
+                                <!-- <input type="text" class="form-control" placeholder="Please insert pbj" name="pbj"> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!-- <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Sumber Dana</label>
+                                <textarea class="form-control" placeholder="Please insert keterangan"></textarea>
+                            </div>
+                        </div>
+                         <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Metode</label>
+                                <input type="text" class="form-control" placeholder="Please insert metode" name="metode">
+                            </div>
+                        </div> --> 
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Sumber Dana</label>
+                                <select class="form-control" name="test">
+                                    <option value="1">2022</option>
+                                    <option value="2">2023</option>
+                                </select>
+                                <!-- <input type="text" class="form-control" placeholder="Please insert pbj" name="pbj"> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!-- <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Keterangan</label>
+                                <textarea class="form-control" placeholder="Please insert keterangan"></textarea>
+                            </div>
+                        </div> -->
                     </div>
                     <div class="row">
                         <div class="col-md-12 d-flex justify-content-end">

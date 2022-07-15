@@ -36,9 +36,9 @@
                                         </a>
                                     </div>
 
-                                    <h6 class="h5 mb-0 mt-4">Welcome back!</h6>
-                                    <p class="text-muted mt-1 mb-4">Enter your username and password to
-                                        access admin panel.</p>
+                                    <h6 class="h5 mb-0 mt-4"></h6>
+                                    <!-- <p class="text-muted mt-1 mb-4">Enter your username and password to
+                                        access admin panel.</p> -->
 
                                     <form action="{{ route('process.login') }}" class="authentication-form" method="post">
                                         @csrf
@@ -83,12 +83,12 @@
                                 </div>
                                 <div class="col-lg-6 d-none d-md-inline-block">
                                     <div class="auth-page-sidebar">
-                                        <div class="overlay"></div>
-                                        <div class="auth-user-testimonial">
+                                        <!-- <div class="overlay"></div> -->
+                                        <!-- <div class="auth-user-testimonial">
                                             <p class="font-size-24 font-weight-bold text-white mb-1">I simply love it!</p>
                                             <p class="lead">"It's a elegent templete. I love it very much!"</p>
                                             <p>- Admin User</p>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
                             </div>
@@ -97,11 +97,11 @@
                     </div>
                     <!-- end card -->
 
-                    <div class="row mt-3">
+                    <!-- <div class="row mt-3">
                         <div class="col-12 text-center">
                             <p class="text-muted">Don't have an account? <a href="pages-register.html" class="text-primary font-weight-bold ml-1">Sign Up</a></p>
                         </div> <!-- end col -->
-                    </div>
+                    </div> 
                     <!-- end row -->
 
                 </div> <!-- end col -->
