@@ -32,6 +32,33 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/roles/{id}', 'Auth\RoleController@show')->name('roles.show');
     Route::post('/roles/store', 'Auth\RoleController@store')->name('roles.store');
     
+    //DASHBOARD
+    Route::get('/dashboard/monitoring-rup', function () {
+        return view('dashboard.monitoring-rup.index');
+    })->name('monitoring.rup');
+    Route::get('/dashboard/monitoring-realisasi', function () {
+        return view('dashboard.monitoring-realisasi.index');
+    })->name('monitoring.realisasi');
+    Route::get('/dashboard/monitoring-pbj', function () {
+        return view('dashboard.monitoring-pbj.index');
+    })->name('monitoring.pbj');
+    Route::get('/dashboard/monitoring-klaring', function () {
+        return view('dashboard.monitoring-klaring.index');
+    })->name('monitoring.klaring');
+    Route::get('/dashboard/monitoring-rab', function () {
+        return view('dashboard.monitoring-rab.index');
+    })->name('monitoring.rab');
+    Route::get('/dashboard/monitoring-vendor', function () {
+        return view('dashboard.monitoring-vendor.index');
+    })->name('monitoring.vendor');
+    Route::get('/dashboard/monitoring-program', function () {
+        return view('dashboard.monitoring-program.index');
+    })->name('monitoring.program');
+    Route::get('/dashboard/monitoring-warehouse', function () {
+        return view('dashboard.monitoring-warehouse.index');
+    })->name('monitoring.warehouse');
+    
+    //MENU-TRX
     Route::get('/timeline/task-approval', function () {
         return view('timeline.task-approval.index');
     })->name('task.approval');

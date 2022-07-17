@@ -219,11 +219,45 @@
                 <div id="sidebar-menu" class="slimscroll-menu">
                     <ul class="metismenu" id="menu-bar">
                         <li>
+                            <a href="javascript: void(0);">
+                                <i data-feather="bookmark"></i>
+                                <span> Dashboard </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+
+                            <ul class="nav-second-level" aria-expanded="false">
+                                <li>
+                                    <a href="{{ route('monitoring.rup') }}">Monitoring RUP</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('monitoring.realisasi') }}">Program - Realisasi Investasi & Biaya</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('monitoring.pbj') }}">Monitoring PBJ & Kontrak</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('monitoring.klaring') }}">Monitoring Import Inklaring</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('monitoring.rab') }}">Monitoring Evaluasi RAB</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('monitoring.vendor') }}">Monitoring Vendor</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('monitoring.program') }}">Monitoring Program</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('monitoring.warehouse') }}">Warehouse</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- <li>
                             <a href="{{ route('home') }}">
                                 <i data-feather="home"></i>
                                 <span> Dashboard </span>
                             </a>
-                        </li>
+                        </li> -->
                         <li>
                             <a href="javascript: void(0);">
                                 <i data-feather="users"></i>
