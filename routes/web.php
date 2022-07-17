@@ -32,6 +32,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/roles/{id}', 'Auth\RoleController@show')->name('roles.show');
     Route::post('/roles/store', 'Auth\RoleController@store')->name('roles.store');
     
+
+    //TIMELINE
+    Route::get('/data/timeline', 'TimelineController@data')->name('data.timeline');
     //DASHBOARD
     Route::get('/dashboard/monitoring-rup', function () {
         return view('dashboard.monitoring-rup.index');
