@@ -11,42 +11,26 @@
                         </div>
                     </div>
 
-                    <table id="basic-datatable" class="table dt-responsive nowrap">
+                    <table id="datatable" class="table dt-responsive nowrap">
                         <thead>
                             <tr>
-                                <th>No</th>
-                                <th>Uraian</th>
-                                <th>User</th>
-                                <th>Direktorat</th>
-                                <th>Realisasi</th>
-                                <th>Nilai RKAP</th>
-                                <th>No PROC ID</th>
-                                <th>No SP 3</th>
-                                <th>TGL SP 3</th>
-                                <th>Metode</th>
-                                <th>PBJ</th>
-                                <th>Keterangan</th>
+                                <th>Directorate</th>
+                                <th>Division</th>
+                                <th>Department</th>
+                                <th>Relisasi</th>
+                                <th>Judul Pengadaan</th>
+                                <th>Nilai PR</th>
+                                <th>Type Tax</th>
+                                <th>Nilai TAX</th>
+                                <th>Status</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
-                            @php
-                            $i = 1;
-                            @endphp
-                            @for($i = 1; $i < 20; $i++) <tr>
-                                <td>{{ $i }}</td>
-                                <td>Pengadaan Lampu LED Ruang Penumpang KRL</td>
-                                <td>CTP</td>
-                                <td>CT</td>
-                                <td>YA (DILUAR TIMELINE)</td>
-                                <td> Rp1.540.328.960 </td>
-                                <td>1532</td>
-                                <td>003/REN-LOG/KCI/I/2022</td>
-                                <td>27/01/2022</td>
-                                <td>LELANG TERBUKA</td>
-                                <td>SARANA</td>
-                                <td>-</td>
-                                </tr>
-                                @endfor
                         </tbody>
                     </table>
 
@@ -56,3 +40,127 @@
     </div>
 </div> <!-- container-fluid -->
 @endsection
+@push('scripts')
+<script>
+    $(document).ready(function() {
+        var timeline = $('#datatable').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('data.sp3') }}",
+            columns: [{
+                    data: 'directorate_cd'
+                },
+                {
+                    data: 'division_cd'
+                },
+                {
+                    data: 'department_cd'
+                },
+                {
+                    data: 'realisasi'
+                },
+                {
+                    data: 'judul_pengadaan'
+                },
+                {
+                    data: 'nilai_pr'
+                },
+                {
+                    data: 'type_tax'
+                },
+                {
+                    data: 'nilai_tax'
+                },
+                {
+                    data: 'proses_st'
+                },
+                {
+                    data: 'action',
+                    name: 'action',
+                    orderable: false,
+                    searchable: false
+                },
+            ]
+        });
+        $('body').on('click', '.approve', function() {
+            Swal.fire({
+                title: 'Are you sure approve timeline?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Approve'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var sp_3_id = $(this).attr('data-bind');
+                    $.ajax({
+                        url: '{{ route("sp3.approve") }}',
+                        dataType: 'json',
+                        method: 'get',
+                        data: {
+                            'sp3_id': sp_3_id
+                        }
+                    }).done(function(response) {
+                        if (response.status == '200') {
+                            Swal.fire(
+                                'Approved!',
+                                'Your timeline has approved.',
+                                'success'
+                            )
+                            timeline.ajax.reload()
+                        } else {
+                            Swal.fire(
+                                'Failed!',
+                                'Your timeline failed approved.',
+                                'success'
+                            )
+                        }
+                    })
+
+                }
+            })
+        })
+
+        $('body').on('click', '.reject', function() {
+            Swal.fire({
+                title: 'Are you sure reject timeline?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Reject'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var sp_3_id = $(this).attr('data-bind');
+                    $.ajax({
+                        url: '{{ route("sp3.reject") }}',
+                        dataType: 'json',
+                        method: 'get',
+                        data: {
+                            'sp3_id': sp_3_id
+                        }
+                    }).done(function(response) {
+                        if (response.status == '200') {
+                            Swal.fire(
+                                'Rejected!',
+                                'Your timeline has rejected.',
+                                'success'
+                            )
+                            timeline.ajax.reload()
+                        } else {
+                            Swal.fire(
+                                'Failed!',
+                                'Your timeline failed reject.',
+                                'success'
+                            )
+                        }
+                    })
+
+                }
+            })
+        })
+    })
+</script>
+@endpush
