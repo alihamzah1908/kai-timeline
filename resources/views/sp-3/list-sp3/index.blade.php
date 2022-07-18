@@ -17,57 +17,26 @@
                             </p>
                         </div>
                     </div>
-                    <table id="basic-datatable" class="table dt-responsive nowrap">
+                    <table id="datatable" class="table dt-responsive nowrap">
                         <thead>
                             <tr>
-                                <th>No</th>
-                                <th>Uraian</th>
-                                <th>User</th>
-                                <th>Direktorat</th>
-                                <th>Realisasi</th>
-                                <th>Nilai RKAP</th>
-                                <th>No PROC ID</th>
-                                <th>No SP 3</th>
-                                <th>TGL SP 3</th>
-                                <th>Metode</th>
-                                <th>PBJ</th>
-                                <th>Keterangan</th>
+                                <th>Directorate</th>
+                                <th>Division</th>
+                                <th>Department</th>
+                                <th>Relisasi</th>
+                                <th>Judul Pengadaan</th>
+                                <th>Nilai PR</th>
+                                <th>Type Tax</th>
+                                <th>Nilai TAX</th>
+                                <th>Status</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
-                            @php
-                            $i = 1;
-                            @endphp
-                            @for($i = 1; $i < 20; $i++) <tr>
-                                <td>{{ $i }}</td>
-                                <td>Pengadaan Lampu LED Ruang Penumpang KRL</td>
-                                <td>CTP</td>
-                                <td>CT</td>
-                                <td>YA (DILUAR TIMELINE)</td>
-                                <td> Rp1.540.328.960 </td>
-                                <td>1532</td>
-                                <td>003/REN-LOG/KCI/I/2022</td>
-                                <td>27/01/2022</td>
-                                <td>LELANG TERBUKA</td>
-                                <td>SARANA</td>
-                                <td>-</td>
-                                <td>
-                                    <div class="dropdown">
-                                        <button class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="true" type="button">Action
-                                            <i class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down">
-                                                    <polyline points="6 9 12 15 18 9"></polyline>
-                                                </svg></i>
-                                            <div></div>
-                                        </button>
-                                        <div class="dropdown-menu" role="menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 28px, 0px); top: 0px; left: 0px; will-change: transform;">
-                                            <a class="dropdown-item" role="presentation" href="javascript:void(0)"> <i class="uil uil-check"></i> Approve</a>
-                                            <a class="dropdown-item" role="presentation" href="javascript:void(0)"> <i class="uil uil-multiply"></i> Reject</a>
-                                        </div>
-                                    </div>
-                                </td>
-                                </tr>
-                                @endfor
                         </tbody>
                     </table>
 
@@ -86,100 +55,324 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form>
-                    <div class="row">
+                <form action="#" id="form-timeline">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="exampleInputEmail1">Realisasi</label><br />
+                            <input type="radio" name="realisasi" class="realisasi" value="ya"> YES (TIMELINE)
+                            <input type="radio" name="realisasi" class="realisasi" value="no"> NO (NO TIMELINE)
+                        </div>
+                    </div>
+                    <div class="row row-timeline">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Uraian</label>
-                                <div id="summernote-editor">
-                                    <p>Please insert uraian</p>
-                                </div> <!-- end summernote-editor-->
+                                <label for="exampleInputEmail1">Timeline</label>
+                                <!-- <div id="summernote-editor">
+                                    <p>Uraian Details</p>
+                                </div> end summernote-editor -->
+                                @php
+                                $timeline = \App\Models\Timeline::select('timeline_id','judul_pengadaan')->where('proses_st', 'PROSES_AT')->get();
+                                @endphp
+                                <select data-plugin="customselect" class="form-control" name="timeline_id">
+                                    @foreach($timeline as $val)
+                                    <option value="{{ $val->timeline_id }}">{{ $val->judul_pengadaan}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row judul-pengadaan">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Judul Pengadaan</label>
+                                <input type="text" class="form-control" placeholder="Please insert judul pengadaan" name="judul_pengadaan">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="exampleInputEmail1">No SP3</label>
+                            <!-- <div id="summernote-editor">
+                                    <p>Uraian Details</p>
+                                </div> end summernote-editor -->
+                            <input type="text" name="nomor_sp3" class="form-control" placeholder="Please insert no sp3">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="exampleInputEmail1">Metode</label>
+                            <!-- <div id="summernote-editor">
+                                    <p>Uraian Details</p>
+                                </div> end summernote-editor -->
+                            <input type="text" name="metode" class="form-control" placeholder="Please insert metode">
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Vendor Name</label>
+                                <!-- <div id="summernote-editor">
+                                    <p>Uraian Details</p>
+                                </div> end summernote-editor -->
+                                <input type="text" name="vendor_name" class="form-control" placeholder="Please insert no mi">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">No MI</label>
+                                <!-- <div id="summernote-editor">
+                                    <p>Uraian Details</p>
+                                </div> end summernote-editor -->
+                                <input type="text" name="no_mi" class="form-control" placeholder="Please insert no mi">
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Direktorat</label>
-                                <input type="text" class="form-control" placeholder="Please insert direktorat" name="direktorat">
+                                <label for="exampleInputEmail1">No PR/IP</label>
+                                <!-- <div id="summernote-editor">
+                                    <p>Uraian Details</p>
+                                </div> end summernote-editor -->
+                                <input type="text" name="no_pr_ip" class="form-control" placeholder="Please insert pr/ip">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Realisasi</label>
-                                <input type="text" class="form-control" placeholder="Please insert direktorat" name="realisasi">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Nilai RKAP</label>
-                                <input type="text" class="form-control" placeholder="Please insert nilai rkap" name="nilai_rkap">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">No PROC ID</label>
-                                <input type="text" class="form-control" placeholder="Please insert no proc id" name="proc_id">
+                                <label for="exampleInputEmail1">No Justifikasi</label>
+                                <!-- <div id="summernote-editor">
+                                    <p>Uraian Details</p>
+                                </div> end summernote-editor -->
+                                <input type="text" name="no_justifikasi" class="form-control" placeholder="Please insert nomor justifikasi">
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="exampleInputEmail1">No SP 3</label>
-                                <input type="text" class="form-control" placeholder="Please insert no sp 3" name="no_sp_3">
+                                <label for="exampleInputEmail1">No RAB</label>
+                                <!-- <div id="summernote-editor">
+                                    <p>Uraian Details</p>
+                                </div> end summernote-editor -->
+                                <input type="text" name="no_rab" class="form-control" placeholder="Please insert nomor rab">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="exampleInputEmail1">TGL SP 3</label>
-                                <input type="text" class="form-control" placeholder="Please insert tgl sp 3" name="tgl_sp_3">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Metode</label>
-                                <input type="text" class="form-control" placeholder="Please insert metode" name="metode">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">PBJ</label>
-                                <input type="text" class="form-control" placeholder="Please insert pbj" name="pbj">
+                                <label for="exampleInputEmail1">No KAK</label>
+                                <!-- <div id="summernote-editor">
+                                    <p>Uraian Details</p>
+                                </div> end summernote-editor -->
+                                <input type="text" name="no_kak" class="form-control" placeholder="Please insert nomor kak">
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Keterangan</label>
-                                <textarea class="form-control" placeholder="Please insert keterangan"></textarea>
+                    <div class="timeline">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Nilai PR</label>
+                                    <!-- <select class="form-control" name="test">
+                                    <option value="1">2022</option>
+                                    <option value="2">2023</option>
+                                </select> -->
+                                    <input type="text" class="form-control" placeholder="Please insert nilai_pr" name="nilai_pr">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Type TAX</label>
+                                    <select class="form-control" name="type_tax">
+                                        <option value="1">Pajak Dipungut, Pajak Dipungut Sebagian, Tidak Dipungut</option>
+                                        <option value="2">Pajak Dipungut (11% dari PR)</option>
+                                        <option value="3">Pajak Dipungut Sebgaian (Input Manual)</option>
+                                    </select>
+                                    <!-- <input type="text" class="form-control" placeholder="Please insert pbj" name="jenis_kontrak"> -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Nilai TAX</label>
+                                    <!-- <select class="form-control" name="test">
+                                    <option value="1">2022</option>
+                                    <option value="2">2023</option>
+                                </select> -->
+                                    <input type="text" class="form-control" placeholder="Please insert nilai tax" name="nilai_tax">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Keterangan</label>
+                                    <textarea class="form-control" placeholder="Please insert keterangan" name="keterangan"></textarea>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12 d-flex justify-content-end">
-                            <button class="btn btn-primary btn-rounded save">Save</button>
+                            <button class="btn btn-primary btn-rounded save" type="button">Save</button>
                         </div>
                     </div>
+
                 </form>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+</div>
 @endsection
 @push('scripts')
 <script>
     $(document).ready(function() {
+        var timeline = $('#datatable').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('data.sp3') }}",
+            columns: [{
+                    data: 'directorate_cd'
+                },
+                {
+                    data: 'division_cd'
+                },
+                {
+                    data: 'department_cd'
+                },
+                {
+                    data: 'realisasi'
+                },
+                {
+                    data: 'judul_pengadaan'
+                },
+                {
+                    data: 'nilai_pr'
+                },
+                {
+                    data: 'type_tax'
+                },
+                {
+                    data: 'nilai_tax'
+                },
+                {
+                    data: 'proses_st'
+                },
+                {
+                    data: 'action',
+                    name: 'action',
+                    orderable: false,
+                    searchable: false
+                },
+            ]
+        });
+
+        $('body').on('click', '.realisasi', function() {
+            var data = $(this).val()
+            console.log(data)
+            if (data == 'no') {
+                $(".row-timeline").hide();
+                $(".timeline").show();
+                $(".judul-pengadaan").show();
+            } else if (data == 'ya') {
+                $(".row-timeline").show();
+                $(".timeline").hide();
+                $(".judul-pengadaan").hide();
+            }
+        })
+        $('body').on('click', '.save', function() {
+            var data = $('#form-timeline').serialize();
+            $.ajax({
+                url: '{{ route("sp3.store") }}',
+                dataType: 'json',
+                method: 'post',
+                data: data
+            }).done(function(response) {
+                if (response.status == '200') {
+                    $('#modal-timeline').modal('hide')
+                    timeline.ajax.reload()
+                }
+            })
+        })
         $('body').on('click', '.create-sp-3', function() {
             $('#modal-timeline').modal('show')
         })
-        $('body').on('click', '.save', function() {
-            $('#modal-timeline').modal('hide')
+        $('body').on('click', '.approve', function() {
+            Swal.fire({
+                title: 'Are you sure approve timeline?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Approve'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var sp_3_id = $(this).attr('data-bind');
+                    $.ajax({
+                        url: '{{ route("sp3.approve") }}',
+                        dataType: 'json',
+                        method: 'get',
+                        data: {
+                            'sp3_id': sp_3_id
+                        }
+                    }).done(function(response) {
+                        if (response.status == '200') {
+                            Swal.fire(
+                                'Approved!',
+                                'Your timeline has approved.',
+                                'success'
+                            )
+                            timeline.ajax.reload()
+                        } else {
+                            Swal.fire(
+                                'Failed!',
+                                'Your timeline failed approved.',
+                                'success'
+                            )
+                        }
+                    })
+
+                }
+            })
+        })
+
+        $('body').on('click', '.reject', function() {
+            Swal.fire({
+                title: 'Are you sure reject timeline?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Reject'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var sp_3_id = $(this).attr('data-bind');
+                    $.ajax({
+                        url: '{{ route("sp3.reject") }}',
+                        dataType: 'json',
+                        method: 'get',
+                        data: {
+                            'sp3_id': sp_3_id
+                        }
+                    }).done(function(response) {
+                        if (response.status == '200') {
+                            Swal.fire(
+                                'Rejected!',
+                                'Your timeline has rejected.',
+                                'success'
+                            )
+                            timeline.ajax.reload()
+                        } else {
+                            Swal.fire(
+                                'Failed!',
+                                'Your timeline failed reject.',
+                                'success'
+                            )
+                        }
+                    })
+
+                }
+            })
         })
     })
 </script>

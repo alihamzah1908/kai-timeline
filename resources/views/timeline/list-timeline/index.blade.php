@@ -1,5 +1,10 @@
 @extends('layouts.master')
 @section('content')
+<style>
+    element {
+        height: 100px;
+    }
+</style>
 <div class="container-fluid">
     <div class="row mt-4">
         <div class="col-12">
@@ -61,37 +66,33 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form>
+                <form action="#" id="form-timeline">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Uraian</label>
-                                <div id="summernote-editor">
+                                <label for="exampleInputEmail1">Judul Pengadaan</label>
+                                <!-- <div id="summernote-editor">
                                     <p>Uraian Details</p>
-                                </div> <!-- end summernote-editor-->
+                                </div> end summernote-editor -->
+                                <textarea name="judul_pengadaan" class="form-control" placeholder="Please insert judul pengadaan"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">No Pengadaan</label>
+                                <input type="text" name="nomor_pengadaan" class="form-control" placeholder="Please insert no pengadaan">
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Direktorat</label>
-                                <input type="text" class="form-control" placeholder="Please insert direktorat" name="direktorat">
-                            </div>
-                        </div>
-                        <!-- <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Realisasi</label>
-                                <input type="text" class="form-control" placeholder="Please insert direktorat" name="realisasi">
-                            </div>
-                        </div> -->
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Metode</label>
-                                <select class="form-control" name="test">
-                                    <option value="1">Penunjukan Langsung</option>
-                                    <option value="2">Pemilihan Langsung</option>
-                                    <option value="3">Pelelangan Terbuka</option>
+                                <label for="exampleInputEmail1">Beban Biaya</label>
+                                <select class="form-control" name="beban_biaya">
+                                    <option value="Penunjukan Langsung">Penunjukan Langsung</option>
+                                    <option value="Pemilihan Langsung">Pemilihan Langsung</option>
+                                    <option value="Pelelangan Terbuka">Pelelangan Terbuka</option>
                                 </select>
                                 <!-- <input type="text" class="form-control" placeholder="Please insert metode" name="metode"> -->
                             </div>
@@ -128,48 +129,106 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Keterangan</label>
-                                <textarea class="form-control" placeholder="Please insert keterangan"></textarea>
+                                <label for="exampleInputEmail1">PBJ</label>
+                                <select class="form-control" name="pbj">
+                                    <option value="Sarana">Sarana</option>
+                                    <option value="Non Sarana">Non Sarana</option>
+                                </select>
+                                <!-- <input type="text" class="form-control" placeholder="Please insert pbj" name="pbj"> -->
                             </div>
                         </div>
-                        <!-- <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Metode</label>
-                                <input type="text" class="form-control" placeholder="Please insert metode" name="metode">
-                            </div>
-                        </div> -->
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="exampleInputEmail1">PBJ</label>
-                                <select class="form-control" name="test">
-                                    <option value="1">Sarana</option>
-                                    <option value="2">Non Sarana</option>
+                                <label for="exampleInputEmail1">Sumber Dana</label>
+                                <select class="form-control" name="sumber_dana">
+                                    <option value="2022">2022</option>
+                                    <option value="2023">2023</option>
                                 </select>
                                 <!-- <input type="text" class="form-control" placeholder="Please insert pbj" name="pbj"> -->
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <!-- <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Sumber Dana</label>
-                                <textarea class="form-control" placeholder="Please insert keterangan"></textarea>
-                            </div>
-                        </div>
-                         <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Metode</label>
-                                <input type="text" class="form-control" placeholder="Please insert metode" name="metode">
-                            </div>
-                        </div> -->
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Sumber Dana</label>
-                                <select class="form-control" name="test">
+                                <label for="exampleInputEmail1">Jenis Kontrak</label>
+                                <br />
+                                <input type="radio" class="jenis_kontrak" name="jenis_kontrak" value="single_year"> Single Year
+                                <input type="radio" class="jenis_kontrak" name="jenis_kontrak" value="multi_year"> Multi Year
+                            </div>
+                        </div>
+                        <div class="col-md-6 jenis_kontrak_year" style="display: none;">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Kontrak Year</label>
+                                <select class="form-control">
+                                    <option value="2021">2021</option>
+                                    <option value="2022">2022</option>
+                                    <option value="2023">2023</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="exampleInputEmail1">Nilai PR</label>
+                            <!-- <select class="form-control" name="test">
                                     <option value="1">2022</option>
                                     <option value="2">2023</option>
+                                </select> -->
+                            <input type="text" class="form-control" placeholder="Please insert nilai_pr" name="nilai_pr">
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Type TAX</label>
+                                <select class="form-control type-tax" name="type_tax">
+                                    <option value="1">Pajak Dipungut, Pajak Dipungut Sebagian, Tidak Dipungut</option>
+                                    <option value="2">Pajak Dipungut (11% dari PR)</option>
+                                    <option value="3">Pajak Dipungut Sebgaian (Input Manual)</option>
                                 </select>
-                                <!-- <input type="text" class="form-control" placeholder="Please insert pbj" name="pbj"> -->
+                                <!-- <input type="text" class="form-control" placeholder="Please insert pbj" name="jenis_kontrak"> -->
+                            </div>
+                        </div>
+                        <div class="col-md-6 nilai-tax" style="display: none;">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Nilai TAX</label>
+                                <!-- <select class="form-control" name="test">
+                                    <option value="1">2022</option>
+                                    <option value="2">2023</option>
+                                </select> -->
+                                <input type="text" class="form-control" placeholder="Please insert nilai tax" name="nilai_tax">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Start Date Pengadaan</label>
+                                <!-- <select class="form-control" name="test">
+                                    <option value="tidak_dipungut">Pajak Dipungut, Pajak Dipungut Sebagian, Tidak Dipungut</option>
+                                    <option value="pajak_dipungut">Pajak Dipungut (11% dari PR)</option>
+                                    <option value="dipungut_sebagian">Pajak Dipungut Sebgaian (Input Manual)</option>
+                                </select> -->
+                                <input type="date" class="form-control" placeholder="Please insert start date" name="start_date">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">End Date Pengadaan</label>
+                                <!-- <select class="form-control" name="test">
+                                    <option value="1">2022</option>
+                                    <option value="2">2023</option>
+                                </select> -->
+                                <input type="date" class="form-control" placeholder="Please insert end date" name="end_date">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Keterangan</label>
+                                <textarea class="form-control" placeholder="Please insert keterangan" name="keterangan"></textarea>
                             </div>
                         </div>
                     </div>
@@ -183,38 +242,67 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12 d-flex justify-content-end">
-                            <button class="btn btn-primary btn-rounded save">Save</button>
+                            <button class="btn btn-primary btn-rounded save" type="button">Save</button>
                         </div>
                     </div>
                 </form>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+</div>
 @endsection
 @push('scripts')
 <script>
     $(document).ready(function() {
-        var table = $('#datatable').DataTable({
+        var timeline = $('#datatable').DataTable({
             processing: true,
             serverSide: true,
             ajax: "{{ route('data.timeline') }}",
-            columns: [
-                {data: 'directorate_cd'},
-                {data: 'division_cd'},
-                {data: 'department_cd'},
-                {data: 'judul_pengadaan'},
-                {data: 'no_pengadaan'},
-                {data: 'sumber_dana'},
-                {data: 'jenis_kontrak'},
-                {data: 'beban_biaya'},
-                {data: 'pbj'},
-                {data: 'nilai_pr'},
-                {data: 'type_tax'},
-                {data: 'nilai_tax'},
-                {data: 'start_date_pengadaan'},
-                {data: 'end_date_pengadaan'},
-                {data: 'proses_st'},
+            columns: [{
+                    data: 'directorate_cd'
+                },
+                {
+                    data: 'division_cd'
+                },
+                {
+                    data: 'department_cd'
+                },
+                {
+                    data: 'judul_pengadaan'
+                },
+                {
+                    data: 'no_pengadaan'
+                },
+                {
+                    data: 'sumber_dana'
+                },
+                {
+                    data: 'jenis_kontrak'
+                },
+                {
+                    data: 'beban_biaya'
+                },
+                {
+                    data: 'pbj'
+                },
+                {
+                    data: 'nilai_pr'
+                },
+                {
+                    data: 'type_tax'
+                },
+                {
+                    data: 'nilai_tax'
+                },
+                {
+                    data: 'start_date_pengadaan'
+                },
+                {
+                    data: 'end_date_pengadaan'
+                },
+                {
+                    data: 'proses_st'
+                },
                 {
                     data: 'action',
                     name: 'action',
@@ -227,7 +315,113 @@
             $('#modal-timeline').modal('show')
         })
         $('body').on('click', '.save', function() {
-            $('#modal-timeline').modal('hide')
+            var data = $('#form-timeline').serialize();
+            $.ajax({
+                url: '{{ route("timeline.store") }}',
+                dataType: 'json',
+                method: 'post',
+                data: data
+            }).done(function(response) {
+                if (response.status == '200') {
+                    $('#modal-timeline').modal('hide')
+                    timeline.ajax.reload();
+                }
+            })
+        })
+        $('body').on('click', '.approve', function() {
+            Swal.fire({
+                title: 'Are you sure approve timeline?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Approve'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var timeline_id = $(this).attr('data-bind');
+                    $.ajax({
+                        url: '{{ route("timeline.approve") }}',
+                        dataType: 'json',
+                        method: 'get',
+                        data: {
+                            'timeline_id': timeline_id
+                        }
+                    }).done(function(response) {
+                        if (response.status == '200') {
+                            Swal.fire(
+                                'Approved!',
+                                'Your timeline has approved.',
+                                'success'
+                            )
+                            timeline.ajax.reload();
+                        } else {
+                            Swal.fire(
+                                'Failed!',
+                                'Your timeline failed approved.',
+                                'success'
+                            )
+                        }
+                    })
+
+                }
+            })
+        })
+
+        $('body').on('click', '.reject', function() {
+            Swal.fire({
+                title: 'Are you sure reject timeline?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Reject'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var timeline_id = $(this).attr('data-bind');
+                    $.ajax({
+                        url: '{{ route("timeline.reject") }}',
+                        dataType: 'json',
+                        method: 'get',
+                        data: {
+                            'timeline_id': timeline_id
+                        }
+                    }).done(function(response) {
+                        if (response.status == '200') {
+                            Swal.fire(
+                                'Rejected!',
+                                'Your timeline has rejected.',
+                                'success'
+                            )
+                            timeline.ajax.reload();
+                        } else {
+                            Swal.fire(
+                                'Failed!',
+                                'Your timeline failed rejected.',
+                                'success'
+                            )
+                        }
+                    })
+
+                }
+            })
+        })
+        $('body').on('click', '.jenis_kontrak', function() {
+            var jenis = $(this).val()
+            if (jenis == 'multi_year') {
+                $(".jenis_kontrak_year").show()
+            } else if (jenis == 'single_year') {
+                $(".jenis_kontrak_year").hide()
+            }
+        })
+        $('body').on('click', '.type-tax', function() {
+            var jenis = $(this).val()
+            if (jenis == '3') {
+                $(".nilai-tax").show()
+            } else {
+                $(".nilai-tax").hide()
+            }
         })
     })
 </script>

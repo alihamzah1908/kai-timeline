@@ -33,8 +33,18 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/roles/store', 'Auth\RoleController@store')->name('roles.store');
     
 
-    //TIMELINE
+    // TIMELINE
     Route::get('/data/timeline', 'TimelineController@data')->name('data.timeline');
+    Route::get('/data/timeline/approve', 'TimelineController@approve')->name('timeline.approve');
+    Route::get('/data/timeline/reject', 'TimelineController@reject')->name('timeline.reject');
+    Route::post('/data/timeline/store', 'TimelineController@store')->name('timeline.store');
+    
+    // SP3
+    Route::get('/data/sp-3', 'Sp3Controller@data')->name('data.sp3');
+    Route::get('/data/sp-3/approve', 'Sp3Controller@approve')->name('sp3.approve');
+    Route::get('/data/sp-3/reject', 'Sp3Controller@reject')->name('sp3.reject');
+    Route::post('/data/sp-3/store', 'Sp3Controller@store')->name('sp3.store');
+
     //DASHBOARD
     Route::get('/dashboard/monitoring-rup', function () {
         return view('dashboard.monitoring-rup.index');

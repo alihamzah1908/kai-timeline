@@ -20,8 +20,13 @@
     <link href="{{ asset('assets/libs/datatables/buttons.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('assets/libs/datatables/select.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('assets/libs/flatpickr/flatpickr.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/libs/bootstrap-tagsinput/bootstrap-tagsinput.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/libs/select2/select2.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/libs/multiselect/multi-select.css') }}" rel="stylesheet" type="text/css" />
 
+    <link href="{{ asset('assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.css') }}" rel="stylesheet" type="text/css" />
     <!-- App css -->
+
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('assets/css/app.min.css') }}" rel="stylesheet" type="text/css" />
@@ -469,6 +474,12 @@
     <script src="{{ asset('assets/libs/apexcharts/apexcharts.min.js') }}"></script>
     <script src="{{ asset('assets/libs/flatpickr/flatpickr.min.js') }}"></script>
 
+    <script src="{{ asset('assets/libs/bootstrap-tagsinput/bootstrap-tagsinput.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/multiselect/jquery.multi-select.js') }}"></script>
+    
+    <script src="{{ asset('assets/libs/select2/select2.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/bootstrap-colorpicker/bootstrap-colorpicker.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js') }}"></script>
     <!-- page js -->
     <script src="{{ asset('assets/js/pages/dashboard.init.js') }}"></script>
 
@@ -478,7 +489,10 @@
     <script src="{{ asset('assets/libs/summernote/summernote-bs4.min.js') }}"></script>
 
     <!-- Init js -->
+    <script src="{{ asset('assets/js/pages/form-advanced.init.js') }}"></script>
+    <!-- <script src="{{ asset('assets/libs/select2/select2.min.js') }}"></script> -->
     <script src="{{ asset('assets/js/pages/form-editor.init.js') }}"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @stack('scripts')
 
 </body>

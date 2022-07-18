@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use DataTables;
 use Illuminate\Support\Facades\Auth;
 
-class TimelineController extends Controller
+class Sp3Controller extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -36,25 +36,41 @@ class TimelineController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
-        // dd(Auth::user());
-        $data = new \App\Models\Timeline();
-        $data->directorate_cd = Auth::user()->directorate_cd;
-        $data->division_cd = Auth::user()->division_cd;
-        $data->department_cd =  Auth::user()->department_cd;
-        $data->judul_pengadaan = $request["judul_pengadaan"];
-        $data->no_pengadaan = $request["nomor_pengadaan"];
-        $data->sumber_dana = 'RKAP ' . $request["sumber_dana"];
-        $data->jenis_kontrak = $request["jenis_kontrak"];
-        $data->beban_biaya = $request["beban_biaya"];
-        $data->pbj = $request["pbj"];
-        $data->nilai_pr = $request["nilai_pr"];
-        $data->type_tax = $request["type_tax"];
-        $data->nilai_tax = $request["nilai_tax"];
-        $data->start_date_pengadaan = $request["start_date"];
-        $data->end_date_pengadaan = $request["end_date"];
+        if ($request["realisasi"] == 'ya') {
+            $timeline = \App\Models\Timeline::where('timeline_id', $request["timeline_id"])->first();
+        } else {
+            $timeline = false;
+        }
+        $data = new \App\Models\SP3();
+        $data->timeline_id = $timeline ? $timeline->timeline_id : NULL;
+        $data->directorate_cd = $timeline ? $timeline->directorate_cd : Auth::user()->directorate_cd;
+        $data->division_cd = $timeline ? $timeline->division_cd : Auth::user()->division_cd;
+        $data->department_cd =  $timeline ? $timeline->department_cd : Auth::user()->department_cd;;
+        $data->judul_pengadaan = $timeline ? $timeline->judul_pengadaan : $request["judul_pengadaan"];
+        $data->no_sp3 = $request["nomor_sp3"];
+        // $data->sumber_dana =  $timeline ? $timeline->sumber_dana : $request["sumber_dana"];
+        // $data->jenis_kontrak =  $timeline ? $timeline->jenis_kontrak : $request["jenis_kontrak"];
+        // $data->beban_biaya =  $timeline ? $timeline->beban_biaya : $request["beban_biaya"];
+        // $data->pbj =  $timeline ? $timeline->pbj : $request["pbj"];
+        $data->nilai_pr =  $timeline ? $timeline->nilai_pr : $request["nilai_pr"];
+        $data->type_tax =  $timeline ? $timeline->type_tax : $request["type_tax"];
+        $data->nilai_tax =  $timeline ? $timeline->nilai_tax : $request["nilai_tax"];
+        $data->tanggal_pr =  date('Y-m-d H:i:s');
+        $data->type_metode =  $request["metode"];
+        $data->tanggal_justifikasi = date('Y-m-d H:i:s');
+        $data->tanggal_rab =  date('Y-m-d H:i:s');
+        $data->tanggal_pr =  date('Y-m-d H:i:s');
+        $data->tanggal_kak =  date('Y-m-d H:i:s');
+        $data->nama_vendor = $request["vendor_name"];
+        $data->no_mi = $request["no_mi"];
+        $data->no_rab = $request["no_mi"];
+        $data->no_justifikasi = $request["no_justifikasi"];
+        $data->no_kak = $request["no_kak"];
+        $data->no_pr = $request["no_pr_ip"];
         $data->proses_st = 'PROSES_DT';
+        $data->keterangan = 'KETERANGAN';
         $data->created_by = Auth::user()->id;
+        $data->updated_by = Auth::user()->id;
         $data->save();
         return response()->json(['status' => '200']);
     }
@@ -106,9 +122,9 @@ class TimelineController extends Controller
 
     public function approve(Request $request)
     {
-        $data = \App\Models\Timeline::where('timeline_id', $request["timeline_id"])->first();
+        $data = \App\Models\SP3::where('sp3_id', $request["sp3_id"])->first();
         if ($data) {
-            $timeline = \App\Models\Timeline::find($request["timeline_id"]);
+            $timeline = \App\Models\SP3::find($request["sp3_id"]);
             $timeline->proses_st = 'PROSES_AT';
             $timeline->save();
             return response()->json(['status' => '200']);
@@ -119,9 +135,9 @@ class TimelineController extends Controller
 
     public function reject(Request $request)
     {
-        $data = \App\Models\Timeline::where('timeline_id', $request["timeline_id"])->first();
+        $data = \App\Models\Timeline::where('sp3_id', $request["sp3_id"])->first();
         if ($data) {
-            $timeline = \App\Models\Timeline::find($request["timeline_id"]);
+            $timeline = \App\Models\Timeline::find($request["sp3_id"]);
             $timeline->proses_st = 'PROSES_CT';
             $timeline->save();
             return response()->json(['status' => '200']);
@@ -132,7 +148,7 @@ class TimelineController extends Controller
 
     public function data(Request $request)
     {
-        $data = \App\Models\Timeline::all();
+        $data = \App\Models\SP3::all();
         return Datatables::of($data)
             ->addColumn('nilai_pr', function ($row) {
                 return number_format($row->nilai_pr, 2);
@@ -149,12 +165,8 @@ class TimelineController extends Controller
             ->addColumn('nilai_tax', function ($row) {
                 return number_format($row->nilai_tax, 2);
             })
-            ->addColumn('jenis_kontrak', function ($row) {
-                if ($row->type_tax == 'single_year') {
-                    return 'SINGLE YEAR';
-                } else if ($row->type_tax == 'multi_year') {
-                    return 'MULTI YEAR';
-                }
+            ->addColumn('realisasi', function ($row) {
+                return $row->timeline_id != '' ? 'YES (TIMELINE)' : 'NO (TIMELINE)';
             })
             ->addColumn('proses_st', function ($row) {
                 if ($row->proses_st == 'PROSES_DT') {
@@ -174,14 +186,13 @@ class TimelineController extends Controller
                                 <div></div>
                             </button>
                             <div class="dropdown-menu" role="menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 28px, 0px); top: 0px; left: 0px; will-change: transform;">
-                                <a class="dropdown-item approve" role="presentation" href="javascript:void(0)" data-bind=' . $row->timeline_id . '> <i class="uil uil-check"></i> Approve</a>
-                                <a class="dropdown-item reject" role="presentation" href="javascript:void(0)" data-bind=' . $row->timeline_id . '> <i class="uil uil-multiply"></i> Reject</a>
+                                <a class="dropdown-item approve" role="presentation" href="javascript:void(0)" data-bind=' . $row->sp3_id . '> <i class="uil uil-check"></i> Approve</a>
+                                <a class="dropdown-item reject" role="presentation" href="javascript:void(0)" data-bind=' . $row->sp3_id . '> <i class="uil uil-multiply"></i> Reject</a>
                             </div>
                         </div>';
                 return $btn;
             })
             ->rawColumns(['action', 'proses_st'])
-
             ->make(true);
     }
 }
