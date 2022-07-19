@@ -15,6 +15,7 @@
     <link href="{{ asset('assets/libs/summernote/summernote-bs4.css') }}" rel="stylesheet" />
 
     <!-- plugins -->
+    <link href="{{ asset('assets/libs/dropzone/dropzone.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('assets/libs/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('assets/libs/datatables/responsive.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('assets/libs/datatables/buttons.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
@@ -26,7 +27,7 @@
 
     <link href="{{ asset('assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.css') }}" rel="stylesheet" type="text/css" />
     <!-- App css -->
-
+    
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('assets/css/app.min.css') }}" rel="stylesheet" type="text/css" />
@@ -476,7 +477,7 @@
 
     <script src="{{ asset('assets/libs/bootstrap-tagsinput/bootstrap-tagsinput.min.js') }}"></script>
     <script src="{{ asset('assets/libs/multiselect/jquery.multi-select.js') }}"></script>
-    
+
     <script src="{{ asset('assets/libs/select2/select2.min.js') }}"></script>
     <script src="{{ asset('assets/libs/bootstrap-colorpicker/bootstrap-colorpicker.min.js') }}"></script>
     <script src="{{ asset('assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js') }}"></script>
@@ -487,12 +488,21 @@
     <script src="{{ asset('assets/js/app.min.js') }}"></script>
     <!--Summernote js-->
     <script src="{{ asset('assets/libs/summernote/summernote-bs4.min.js') }}"></script>
-
+    <script src="{{ asset('assets/libs/dropzone/dropzone.min.js') }}"></script>
     <!-- Init js -->
     <script src="{{ asset('assets/js/pages/form-advanced.init.js') }}"></script>
     <!-- <script src="{{ asset('assets/libs/select2/select2.min.js') }}"></script> -->
     <script src="{{ asset('assets/js/pages/form-editor.init.js') }}"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    <script>
+        $('.money').mask('000.000.000.000.000', {
+            reverse: true
+        });
+        $('.mask-date').mask('00/00/0000');
+        $('.mask-time').mask('00:00');
+        $('.mask-phone').mask('00000000000');
+    </script>
     @stack('scripts')
 
 </body>

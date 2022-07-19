@@ -55,7 +55,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="#" id="form-timeline">
+                <form action='{{ route("sp3.store") }}' id="form-timeline" enctype="multipart/form-data" method="post">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                     <div class="row mb-3">
                         <div class="col-md-6">
@@ -95,11 +95,11 @@
                         </div> -->
                         <div class="col-md-6">
                             <label for="exampleInputEmail1">Metode</label>
-                                <select class="form-control type-metode" name="type_metode">
-                                    <option value="1">Penunjukan Langsung</option>
-                                    <option value="2">Pemilihan Langsung</option>
-                                    <option value="3">Pelelangan Terbuka</option>
-                                </select>
+                            <select class="form-control type-metode" name="type_metode">
+                                <option value="1">Penunjukan Langsung</option>
+                                <option value="2">Pemilihan Langsung</option>
+                                <option value="3">Pelelangan Terbuka</option>
+                            </select>
                             <!-- <input type="text" name="metode" class="form-control" placeholder="Please insert metode"> -->
                         </div>
                         <div class="col-md-6">
@@ -114,27 +114,27 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Nilai PR</label>
-                                    <input type="text" class="form-control" placeholder="Please insert nilai_pr" name="nilai_pr">
+                                    <input type="text" class="form-control nilai-pr money" placeholder="Please insert nilai_pr" name="nilai_pr">
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Type TAX</label>
-                                <select class="form-control type-tax" name="type_tax">
-                                    <option value="1">Pajak Tidak Dipungut</option>
-                                    <option value="2">Pajak Dipungut</option>
-                                    <option value="3">Pajak Dipungut Sebagian</option>
-                                </select>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Type TAX</label>
+                                    <select class="form-control type-tax" name="type_tax">
+                                        <option value="1">Pajak Tidak Dipungut</option>
+                                        <option value="2">Pajak Dipungut</option>
+                                        <option value="3">Pajak Dipungut Sebagian</option>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6 nilai-tax" style="display: none;">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Nilai TAX</label>
-                                <input type="text" class="form-control" placeholder="Please insert nilai tax" name="nilai_tax">
+                            <div class="col-md-4 nilai-tax border">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Nilai TAX</label>
+                                    <input type="text" class="form-control nilai-tax-value" placeholder="Please insert nilai tax" name="nilai_tax" disabled>
+                                </div>
                             </div>
-                        </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
@@ -145,7 +145,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row mt-3">
+                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">No MI</label>
@@ -219,11 +219,22 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12 d-flex justify-content-end">
-                            <button class="btn btn-primary btn-rounded save" type="button">Save</button>
+                        <div class="col-md-12">
+                            <h5 class="header-title">Upload File</h5>
+                            <div class="fallback">
+                                <input name="file[]" type="file" id="file" multiple />
+                            </div>
+                            <div class="dz-message needsclick">
+                                <i class="h1 text-muted  uil-cloud-upload"></i>
+                            </div>
                         </div>
                     </div>
-
+                    <div class="row">
+                        <div class="col-md-12 d-flex justify-content-end">
+                            <input class="btn btn-warning btn-rounded save" type="submit" name="save" value="Save As Draft">
+                            <input class="btn btn-primary btn-rounded save ml-2" type="submit" name="save" value="Submit">
+                        </div>
+                    </div>
                 </form>
             </div>
         </div><!-- /.modal-content -->
@@ -264,12 +275,12 @@
                 {
                     data: 'proses_st'
                 },
-                {
-                    data: 'action',
-                    name: 'action',
-                    orderable: false,
-                    searchable: false
-                },
+                // {
+                //     data: 'action',
+                //     name: 'action',
+                //     orderable: false,
+                //     searchable: false
+                // },
             ]
         });
 
@@ -287,19 +298,26 @@
             }
         })
         $('body').on('click', '.save', function() {
-            var data = $('#form-timeline').serialize();
-            $.ajax({
-                url: '{{ route("sp3.store") }}',
-                dataType: 'json',
-                method: 'post',
-                data: data
-            }).done(function(response) {
-                if (response.status == '200') {
-                    $('#modal-timeline').modal('hide')
-                    timeline.ajax.reload()
-                }
-            })
-        })
+            $("#form-timeline").submit(); // Submit the form
+        });
+        // $('body').on('click', '.save', function() {
+        //     var data = $('#form-timeline').serialize();
+        //     const photo_anak = $('#photo-anak').prop('files')[0];
+        //     const photo_ktp = $('#photo-ktp').prop('files')[0];
+        //     $.ajax({
+        //         url: '{{ route("sp3.store") }}',
+        //         dataType: 'json',
+        //         method: 'post',
+        //         data: data,
+        //         processData: false,
+        //         contentType: false,
+        //     }).done(function(response) {
+        //         if (response.status == '200') {
+        //             $('#modal-timeline').modal('hide')
+        //             timeline.ajax.reload()
+        //         }
+        //     })
+        // })
         $('body').on('click', '.create-sp-3', function() {
             $('#modal-timeline').modal('show')
         })
@@ -343,13 +361,47 @@
             })
         })
 
-        $('body').on('click', '.type-tax', function() {
+        $('body').on('change', '.type-tax', function() {
+            var nilai_pr = $(".nilai-pr").val()
+            var new_nilai_pr = nilai_pr.replace(/\./g, '')
             var jenis = $(this).val()
-            if (jenis == '3') {
+            if (jenis == '1') {
+                const format = new_nilai_pr.toString().split('').reverse().join('');
+                const convert = format.match(/\d{1,3}/g);
+                const rupiah = convert.join('.').split('').reverse().join('')
                 $(".nilai-tax").show()
-            } else {
-                $(".nilai-tax").hide()
+                $(".nilai-tax-value").val('0')
+                $(".nilai-pr").val(rupiah)
+                $(".nilai-tax-value").prop('disabled', true)
+            } else if (jenis == '2') {
+                var persen = (11 / 100);
+                var total = parseInt(new_nilai_pr) * persen
+                var totalFix = parseInt(new_nilai_pr) - total
+                const format = totalFix.toString().split('').reverse().join('');
+                const convert = format.match(/\d{1,3}/g);
+                const rupiah = convert.join('.').split('').reverse().join('')
+                $(".nilai-tax").show()
+                $(".nilai-tax-value").val('11')
+                $(".nilai-tax-percent").html('%')
+                $(".nilai-pr").val(rupiah)
+                $(".nilai-tax-value").prop('disabled', true)
+            } else if (jenis == '3') {
+                $(".nilai-tax").show()
+                $(".nilai-tax-value").prop('disabled', false)
+                $(".nilai-tax-value").val(' ')
+                $(".nilai-pr").val(nilai_pr)
             }
+        })
+        $('body').on('keyup', '.nilai-tax-value', function() {
+            var persen = (parseInt($(this).val()) / 100)
+            var nilai_pr = $(".nilai-pr").val()
+            var new_nilai_pr = nilai_pr.replace(/\./g, '')
+            var hasil_kalkulasi = parseInt(new_nilai_pr) * persen;
+            var hasilFix = parseInt(new_nilai_pr) - parseInt(hasil_kalkulasi);
+            const format = hasilFix.toString().split('').reverse().join('');
+            const convert = format.match(/\d{1,3}/g);
+            const rupiah = convert.join('.').split('').reverse().join('')
+            $('.nilai-pr').val(rupiah)
         })
 
         $('body').on('click', '.reject', function() {

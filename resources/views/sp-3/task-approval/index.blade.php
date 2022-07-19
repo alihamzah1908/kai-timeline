@@ -27,7 +27,7 @@
                                 <th></th>
                                 <th></th>
                                 <th></th>
-                                <th></th>
+                                <!-- <th></th> -->
                             </tr>
                         </thead>
                         <tbody>
@@ -46,7 +46,12 @@
         var timeline = $('#datatable').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ route('data.sp3') }}",
+            ajax: {
+                url: "{{ route('data.sp3') }}",
+                data: {
+                    'timeline_type': 'approval'
+                }
+            },
             columns: [{
                     data: 'directorate_cd'
                 },
@@ -74,12 +79,12 @@
                 {
                     data: 'proses_st'
                 },
-                {
-                    data: 'action',
-                    name: 'action',
-                    orderable: false,
-                    searchable: false
-                },
+                // {
+                //     data: 'action',
+                //     name: 'action',
+                //     orderable: false,
+                //     searchable: false
+                // },
             ]
         });
         $('body').on('click', '.approve', function() {

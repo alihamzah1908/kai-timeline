@@ -37,25 +37,26 @@ class TimelineController extends Controller
     public function store(Request $request)
     {
         // dd($request->all());
-        // dd(Auth::user());
         $data = new \App\Models\Timeline();
         $data->directorate_cd = Auth::user()->directorate_cd;
         $data->division_cd = Auth::user()->division_cd;
         $data->department_cd =  Auth::user()->department_cd;
         $data->judul_pengadaan = $request["judul_pengadaan"];
-        $data->no_pengadaan = $request["nomor_pengadaan"];
         $data->sumber_dana = 'RKAP ' . $request["sumber_dana"];
         $data->jenis_kontrak = $request["jenis_kontrak"];
         $data->beban_biaya = $request["beban_biaya"];
         $data->pbj = $request["pbj"];
-        $data->nilai_pr = $request["nilai_pr"];
+        $data->nilai_pr = str_replace('.', '', $request["nilai_pr"]);
         $data->type_tax = $request["type_tax"];
         $data->nilai_tax = $request["nilai_tax"];
         $data->start_date_pengadaan = $request["start_date"];
         $data->end_date_pengadaan = $request["end_date"];
-        $data->proses_st = 'PROSES_DT';
+        $data->proses_st = $request["save"] == 'draft' ? 'PROSES_DT' : 'PROSES_ST';
         $data->created_by = Auth::user()->id;
         $data->save();
+        $data2 = \App\Models\Timeline::find($data->timeline_id);
+        $data2->no_pengadaan = 'OP/' . Auth::user()->division_cd  . '/' . date('Y') . '/' . $data->timeline_id;
+        $data2->save();
         return response()->json(['status' => '200']);
     }
 
@@ -132,7 +133,14 @@ class TimelineController extends Controller
 
     public function data(Request $request)
     {
-        $data = \App\Models\Timeline::all();
+
+        $timeline = \App\Models\Timeline::orderBy('timeline_id', 'desc');
+        if ($request["timeline_type"] == 'approval') {
+            $timeline->where('proses_st', 'PROSES_ST');
+            $timeline->orWhere('proses_st', 'PROSES_AT');
+            $timeline->orWhere('proses_st', 'PROSES_CT');
+        }
+        $data = $timeline->get();
         return Datatables::of($data)
             ->addColumn('nilai_pr', function ($row) {
                 return number_format($row->nilai_pr, 2);
@@ -147,7 +155,13 @@ class TimelineController extends Controller
                 }
             })
             ->addColumn('nilai_tax', function ($row) {
-                return number_format($row->nilai_tax, 2);
+                return $row->nilai_tax . '%';
+            })
+            ->addColumn('start_date_pengadaan', function ($row) {
+                return date('d M Y', strtotime($row->start_date_pengadaan));
+            })
+            ->addColumn('end_date_pengadaan', function ($row) {
+                return date('d M Y', strtotime($row->end_date_pengadaan));
             })
             ->addColumn('jenis_kontrak', function ($row) {
                 if ($row->type_tax == 'single_year') {
@@ -158,15 +172,20 @@ class TimelineController extends Controller
             })
             ->addColumn('proses_st', function ($row) {
                 if ($row->proses_st == 'PROSES_DT') {
-                    return '<badges class="badge badge-warning">' . $row->proses_st . '</badges>';
+                    return '<badges class="badge badge-warning">Draft Timeline</badges>';
                 } else if ($row->proses_st == 'PROSES_AT') {
-                    return '<badges class="badge badge-success">' . $row->proses_st . '</badges>';
+                    return '<badges class="badge badge-success">Approved Timeline</badges>';
                 } else if ($row->proses_st == 'PROSES_CT') {
-                    return '<badges class="badge badge-danger">' . $row->proses_st . '</badges>';
+                    return '<badges class="badge badge-danger">Canceled Timeline</badges>';
+                } else if ($row->proses_st == 'PROSES_ST') {
+                    return '<badges class="badge badge-primary">Submitted Timeline</badges>';
                 }
             })
             ->addColumn('action', function ($row) {
-                $btn = '<div class="dropdown">
+                if ($row->proses_st == 'PROSES_CT' || $row->proses_st == 'PROSES_AT') {
+                    $btn = '';
+                } else {
+                    $btn = '<div class="dropdown">
                             <button class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="true" type="button">Action
                                 <i class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down">
                                         <polyline points="6 9 12 15 18 9"></polyline>
@@ -178,6 +197,7 @@ class TimelineController extends Controller
                                 <a class="dropdown-item reject" role="presentation" href="javascript:void(0)" data-bind=' . $row->timeline_id . '> <i class="uil uil-multiply"></i> Reject</a>
                             </div>
                         </div>';
+                }
                 return $btn;
             })
             ->rawColumns(['action', 'proses_st'])

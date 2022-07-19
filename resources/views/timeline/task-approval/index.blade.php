@@ -51,7 +51,12 @@
         var timeline = $('#datatable').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ route('data.timeline') }}",
+            ajax: {
+                url: "{{ route('data.timeline') }}",
+                data: {
+                    'timeline_type': 'approval'
+                }
+            },
             columns: [{
                     data: 'directorate_cd'
                 },

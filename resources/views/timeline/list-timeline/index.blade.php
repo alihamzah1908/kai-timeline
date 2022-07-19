@@ -44,7 +44,7 @@
                                 <th></th>
                                 <th></th>
                                 <th></th>
-                                <th></th>
+                                <!-- <th></th> -->
                             </tr>
                         </thead>
                         <tbody>
@@ -183,7 +183,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <label for="exampleInputEmail1">Nilai PR</label>
-                            <input type="text" class="form-control" placeholder="Please insert nilai_pr" name="nilai_pr">
+                            <input type="text" class="form-control money nilai-pr" placeholder="Please insert nilai_pr" name="nilai_pr">
                         </div>
                     </div>
                     <div class="row mt-3">
@@ -191,16 +191,18 @@
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Type TAX</label>
                                 <select class="form-control type-tax" name="type_tax">
+                                    <option value="">Pilih</option>/option>
                                     <option value="1">Pajak Tidak Dipungut</option>
                                     <option value="2">Pajak Dipungut</option>
                                     <option value="3">Pajak Dipungut Sebagian</option>
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-6 nilai-tax" style="display: none;">
+                        <div class="col-md-4 nilai-tax border">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Nilai TAX</label>
-                                <input type="text" class="form-control" placeholder="Please insert nilai tax" name="nilai_tax">
+                                <input type="text" class="form-control nilai-tax-value" placeholder="Please insert nilai tax" disabled>
+                                <input type="hidden" class="form-control nilai-tax-insert" placeholder="Please insert nilai tax" name="nilai_tax">
                             </div>
                         </div>
                     </div>
@@ -227,11 +229,10 @@
                         </div>
                     </div>
                     <div class="row">
-                    </div>
-                    <div class="row">
+                        <input type="hidden" name="save" id="save" value="">
                         <div class="col-md-12 d-flex justify-content-end">
-                            <button class="btn btn-primary btn-rounded save" type="button">Save as Draft</button>
-                            <button class="btn btn-primary btn-rounded submit" type="button">Submit</button>
+                            <button class="btn btn-warning btn-rounded save" data-bind="draft" type="button">Save as Draft</button>
+                            <button class="btn btn-primary btn-rounded ml-2 save" data-bind="submit" type="button">Submit</button>
                         </div>
                     </div>
                 </form>
@@ -305,6 +306,8 @@
         })
         $('body').on('click', '.save', function() {
             var data = $('#form-timeline').serialize();
+            var type = $(this).attr('data-bind');
+            $('#save').val(type)
             $.ajax({
                 url: '{{ route("timeline.store") }}',
                 dataType: 'json',
@@ -314,6 +317,7 @@
                 if (response.status == '200') {
                     $('#modal-timeline').modal('hide')
                     timeline.ajax.reload();
+                    $('#form-timeline')[0].reset();
                 }
             })
         })
@@ -404,13 +408,50 @@
                 $(".jenis_kontrak_year").hide()
             }
         })
-        $('body').on('click', '.type-tax', function() {
+        $('body').on('change', '.type-tax', function() {
+            var nilai_pr = $(".nilai-pr").val()
+            var new_nilai_pr = nilai_pr.replace(/\./g, '')
             var jenis = $(this).val()
-            if (jenis == '3') {
+            if (jenis == '1') {
+                const format = new_nilai_pr.toString().split('').reverse().join('');
+                const convert = format.match(/\d{1,3}/g);
+                const rupiah = convert.join('.').split('').reverse().join('')
                 $(".nilai-tax").show()
-            } else {
-                $(".nilai-tax").hide()
+                $(".nilai-tax-value").val('0')
+                $(".nilai-tax-insert").val('0')
+                $(".nilai-pr").val(rupiah)
+                $(".nilai-tax-value").prop('disabled', true)
+            } else if (jenis == '2') {
+                var persen = (11 / 100);
+                var total = parseInt(new_nilai_pr) * persen
+                var totalFix = parseInt(new_nilai_pr) - total
+                const format = totalFix.toString().split('').reverse().join('');
+                const convert = format.match(/\d{1,3}/g);
+                const rupiah = convert.join('.').split('').reverse().join('')
+                $(".nilai-tax").show()
+                $(".nilai-tax-value").val('11')
+                $(".nilai-tax-insert").val('11')
+                $(".nilai-tax-percent").html('%')
+                $(".nilai-pr").val(rupiah)
+                $(".nilai-tax-value").prop('disabled', true)
+            } else if (jenis == '3') {
+                $(".nilai-tax").show()
+                $(".nilai-tax-value").prop('disabled', false)
+                $(".nilai-tax-value").val(' ')
+                $(".nilai-tax-insert").val(' ')
+                $(".nilai-pr").val(nilai_pr)
             }
+        })
+        $('body').on('keyup', '.nilai-tax-value', function() {
+            var persen = (parseInt($(this).val()) / 100)
+            var nilai_pr = $(".nilai-pr").val()
+            var new_nilai_pr = nilai_pr.replace(/\./g, '')
+            var hasil_kalkulasi = parseInt(new_nilai_pr) * persen;
+            var hasilFix = parseInt(new_nilai_pr) - parseInt(hasil_kalkulasi);
+            const format = hasilFix.toString().split('').reverse().join('');
+            const convert = format.match(/\d{1,3}/g);
+            const rupiah = convert.join('.').split('').reverse().join('')
+            $('.nilai-pr').val(rupiah)
         })
     })
 </script>

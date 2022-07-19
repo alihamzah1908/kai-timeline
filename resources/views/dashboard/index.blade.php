@@ -187,6 +187,7 @@
         url: "{{ route('task.approval') }}",
         color: 'orange'
     });
+    console.log(seriesData)
     Highcharts.chart('container', {
         chart: {
             type: 'bar'
