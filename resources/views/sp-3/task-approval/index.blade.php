@@ -39,6 +39,56 @@
         </div><!-- end col-->
     </div>
 </div> <!-- container-fluid -->
+<div class="modal fade" id="modal-evaluasi" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myLargeModalLabel">Evaluasi SP 3</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action='{{ route("evaluasi.store") }}' id="form-evaluasi" enctype="multipart/form-data" method="post">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                    <input type="hidden" name="sp3_id" id="sp3_id" value="{{ csrf_token() }}" />
+                    <div class="row-evaluasi">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Item</label>
+                                    <input type="text" name="item_cd[]" class="form-control" placeholder="please insert item">
+                                </div>
+                            </div>
+                            <div class="col-md-10">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Uraian/Dokuemen</label>
+                                    <input type="text" name="item_value[]" class="form-control" placeholder="please insert uraian">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Keterangan</label>
+                                    <textarea name="keterangan[]" class="form-control"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 d-flex justify-content-start">
+                            <button class="btn btn-success btn-rounded add-form btn-sm" type="button">Add Form</button>
+                        </div>
+                        <div class="col-md-12 d-flex justify-content-end">
+                            <input class="btn btn-primary btn-rounded save ml-2" type="submit" name="save" value="Submit">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
 @endsection
 @push('scripts')
 <script>
@@ -79,12 +129,12 @@
                 {
                     data: 'proses_st'
                 },
-                // {
-                //     data: 'action',
-                //     name: 'action',
-                //     orderable: false,
-                //     searchable: false
-                // },
+                {
+                    data: 'action',
+                    name: 'action',
+                    orderable: false,
+                    searchable: false
+                },
             ]
         });
         $('body').on('click', '.approve', function() {
@@ -165,6 +215,38 @@
 
                 }
             })
+        })
+        
+        $('body').on('click', '.evaluasi', function() {
+            var data = $(this).attr('data-bind');
+            $("#sp3_id").val(data)
+            $("#modal-evaluasi").modal('show')
+        })
+
+        $('body').on('click', '.add-form', function() {
+            var body = '<div class="row border-top">'
+            body += '<div class="col-md-2">'
+            body += '<div class="form-group">'
+            body += '<label for="exampleInputEmail1">Item</label>'
+            body += '<input type="text" name="item_cd[]" class="form-control" placeholder="please insert item">'
+            body += '</div>'
+            body += '</div>'
+            body += '<div class="col-md-10">'
+            body += '<div class="form-group">'
+            body += '<label for="exampleInputEmail1">Uraian/Dokuemen</label>'
+            body += '<input type="text" name="item_value[]" class="form-control" placeholder="please insert uraian">'
+            body += '</div>'
+            body += '</div>'
+            body += '</div>'
+            body += '<div class="row">'
+            body += '<div class="col-md-12">'
+            body += '<div class="form-group">'
+            body += '<label for="exampleInputEmail1">Keterangan</label>'
+            body += '<textarea name="keterangan[]" class="form-control"></textarea>'
+            body += '</div>'
+            body += '</div>'
+            body += '</div>'
+            $(".row-evaluasi").append(body)
         })
     })
 </script>

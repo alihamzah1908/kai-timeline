@@ -44,6 +44,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/data/sp-3/approve', 'Sp3Controller@approve')->name('sp3.approve');
     Route::get('/data/sp-3/reject', 'Sp3Controller@reject')->name('sp3.reject');
     Route::post('/data/sp-3/store', 'Sp3Controller@store')->name('sp3.store');
+    Route::post('/data/sp-3/evaluasi/store', 'Sp3Controller@evaluasi_store')->name('evaluasi.store');
 
     //DASHBOARD
     Route::get('/dashboard/monitoring-rup', function () {
