@@ -78,14 +78,24 @@
                                 <textarea name="judul_pengadaan" class="form-control" placeholder="Please insert judul pengadaan"></textarea>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <!-- <div class="col-md-6">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">No Pengadaan</label>
                                 <input type="text" name="nomor_pengadaan" class="form-control" placeholder="Please insert no pengadaan">
                             </div>
+                        </div> -->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Beban Biaya</label>
+                                <select class="form-control" name="beban_biaya">
+                                    <option value="CAPEX">Capex</option>
+                                    <option value="OPEX">Opex</option>
+                                </select>
+                                <!-- <input type="text" class="form-control" placeholder="Please insert metode" name="metode"> -->
+                            </div>
                         </div>
                     </div>
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Beban Biaya</label>
@@ -94,11 +104,11 @@
                                     <option value="Pemilihan Langsung">Pemilihan Langsung</option>
                                     <option value="Pelelangan Terbuka">Pelelangan Terbuka</option>
                                 </select>
-                                <!-- <input type="text" class="form-control" placeholder="Please insert metode" name="metode"> -->
+                                <input type="text" class="form-control" placeholder="Please insert metode" name="metode">
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
+                    </div> -->
+                    <!-- <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Nilai RUP</label>
@@ -111,7 +121,7 @@
                                 <input type="text" class="form-control" placeholder="Please insert no proc id" name="proc_id">
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <!-- <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -141,7 +151,8 @@
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Sumber Dana</label>
                                 <select class="form-control" name="sumber_dana">
-                                    <option value="2022">2022</option>
+                                    <option value="2022">2021</option>
+                                    <option value="2023">2022</option>
                                     <option value="2023">2023</option>
                                 </select>
                                 <!-- <input type="text" class="form-control" placeholder="Please insert pbj" name="pbj"> -->
@@ -159,11 +170,12 @@
                         </div>
                         <div class="col-md-6 jenis_kontrak_year" style="display: none;">
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Kontrak Year</label>
+                                <label for="exampleInputEmail1">Total Year</label>
                                 <select class="form-control">
-                                    <option value="2021">2021</option>
-                                    <option value="2022">2022</option>
-                                    <option value="2023">2023</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="4">4</option>
                                 </select>
                             </div>
                         </div>
@@ -171,10 +183,6 @@
                     <div class="row">
                         <div class="col-md-6">
                             <label for="exampleInputEmail1">Nilai PR</label>
-                            <!-- <select class="form-control" name="test">
-                                    <option value="1">2022</option>
-                                    <option value="2">2023</option>
-                                </select> -->
                             <input type="text" class="form-control" placeholder="Please insert nilai_pr" name="nilai_pr">
                         </div>
                     </div>
@@ -183,20 +191,15 @@
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Type TAX</label>
                                 <select class="form-control type-tax" name="type_tax">
-                                    <option value="1">Pajak Dipungut, Pajak Dipungut Sebagian, Tidak Dipungut</option>
-                                    <option value="2">Pajak Dipungut (11% dari PR)</option>
-                                    <option value="3">Pajak Dipungut Sebgaian (Input Manual)</option>
+                                    <option value="1">Pajak Tidak Dipungut</option>
+                                    <option value="2">Pajak Dipungut</option>
+                                    <option value="3">Pajak Dipungut Sebgaian</option>
                                 </select>
-                                <!-- <input type="text" class="form-control" placeholder="Please insert pbj" name="jenis_kontrak"> -->
                             </div>
                         </div>
                         <div class="col-md-6 nilai-tax" style="display: none;">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Nilai TAX</label>
-                                <!-- <select class="form-control" name="test">
-                                    <option value="1">2022</option>
-                                    <option value="2">2023</option>
-                                </select> -->
                                 <input type="text" class="form-control" placeholder="Please insert nilai tax" name="nilai_tax">
                             </div>
                         </div>
@@ -205,21 +208,12 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Start Date Pengadaan</label>
-                                <!-- <select class="form-control" name="test">
-                                    <option value="tidak_dipungut">Pajak Dipungut, Pajak Dipungut Sebagian, Tidak Dipungut</option>
-                                    <option value="pajak_dipungut">Pajak Dipungut (11% dari PR)</option>
-                                    <option value="dipungut_sebagian">Pajak Dipungut Sebgaian (Input Manual)</option>
-                                </select> -->
                                 <input type="date" class="form-control" placeholder="Please insert start date" name="start_date">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">End Date Pengadaan</label>
-                                <!-- <select class="form-control" name="test">
-                                    <option value="1">2022</option>
-                                    <option value="2">2023</option>
-                                </select> -->
                                 <input type="date" class="form-control" placeholder="Please insert end date" name="end_date">
                             </div>
                         </div>
@@ -233,16 +227,11 @@
                         </div>
                     </div>
                     <div class="row">
-                        <!-- <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Keterangan</label>
-                                <textarea class="form-control" placeholder="Please insert keterangan"></textarea>
-                            </div>
-                        </div> -->
                     </div>
                     <div class="row">
                         <div class="col-md-12 d-flex justify-content-end">
-                            <button class="btn btn-primary btn-rounded save" type="button">Save</button>
+                            <button class="btn btn-primary btn-rounded save" type="button">Save as Draft</button>
+                            <button class="btn btn-primary btn-rounded submit" type="button">Submit</button>
                         </div>
                     </div>
                 </form>
@@ -303,12 +292,12 @@
                 {
                     data: 'proses_st'
                 },
-                {
-                    data: 'action',
-                    name: 'action',
-                    orderable: false,
-                    searchable: false
-                },
+                // {
+                //     data: 'action',
+                //     name: 'action',
+                //     orderable: false,
+                //     searchable: false
+                // },
             ]
         });
         $('body').on('click', '.create-timeline', function() {
