@@ -60,17 +60,14 @@
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label for="exampleInputEmail1">Realisasi</label><br />
-                            <input type="radio" name="realisasi" class="realisasi" value="ya"> YES (TIMELINE)
-                            <input type="radio" name="realisasi" class="realisasi" value="no"> NO (NO TIMELINE)
+                            <input type="radio" name="realisasi" class="realisasi" value="ya"> Timeline
+                            <input type="radio" name="realisasi" class="realisasi" value="no"> Diluar Timeline
                         </div>
                     </div>
                     <div class="row row-timeline">
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Timeline</label>
-                                <!-- <div id="summernote-editor">
-                                    <p>Uraian Details</p>
-                                </div> end summernote-editor -->
                                 @php
                                 $timeline = \App\Models\Timeline::select('timeline_id','judul_pengadaan')->where('proses_st', 'PROSES_AT')->get();
                                 @endphp
@@ -92,38 +89,73 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6">
+                        <!-- <div class="col-md-6">
                             <label for="exampleInputEmail1">No SP3</label>
-                            <!-- <div id="summernote-editor">
-                                    <p>Uraian Details</p>
-                                </div> end summernote-editor -->
                             <input type="text" name="nomor_sp3" class="form-control" placeholder="Please insert no sp3">
-                        </div>
+                        </div> -->
                         <div class="col-md-6">
                             <label for="exampleInputEmail1">Metode</label>
-                            <!-- <div id="summernote-editor">
-                                    <p>Uraian Details</p>
-                                </div> end summernote-editor -->
-                            <input type="text" name="metode" class="form-control" placeholder="Please insert metode">
+                                <select class="form-control type-metode" name="type_metode">
+                                    <option value="1">Penunjukan Langsung</option>
+                                    <option value="2">Pemilihan Langsung</option>
+                                    <option value="3">Pelelangan Terbuka</option>
+                                </select>
+                            <!-- <input type="text" name="metode" class="form-control" placeholder="Please insert metode"> -->
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Vendor Name</label>
+                                <input type="text" name="vendor_name" class="form-control" placeholder="Please insert vendor name">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Nilai PR</label>
+                                    <input type="text" class="form-control" placeholder="Please insert nilai_pr" name="nilai_pr">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Type TAX</label>
+                                <select class="form-control type-tax" name="type_tax">
+                                    <option value="1">Pajak Tidak Dipungut</option>
+                                    <option value="2">Pajak Dipungut</option>
+                                    <option value="3">Pajak Dipungut Sebagian</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6 nilai-tax" style="display: none;">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Nilai TAX</label>
+                                <input type="text" class="form-control" placeholder="Please insert nilai tax" name="nilai_tax">
+                            </div>
+                        </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Keterangan</label>
+                                    <textarea class="form-control" placeholder="Please insert keterangan" name="keterangan"></textarea>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="row mt-3">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Vendor Name</label>
-                                <!-- <div id="summernote-editor">
-                                    <p>Uraian Details</p>
-                                </div> end summernote-editor -->
-                                <input type="text" name="vendor_name" class="form-control" placeholder="Please insert no mi">
+                                <label for="exampleInputEmail1">No MI</label>
+                                <input type="text" name="no_mi" class="form-control" placeholder="Please insert no mi">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="exampleInputEmail1">No MI</label>
-                                <!-- <div id="summernote-editor">
-                                    <p>Uraian Details</p>
-                                </div> end summernote-editor -->
-                                <input type="text" name="no_mi" class="form-control" placeholder="Please insert no mi">
+                                <label for="exampleInputEmail1">Tanggal MI</label>
+                                <input type="date" class="form-control" placeholder="Please insert start date" name="date_mi">
                             </div>
                         </div>
                     </div>
@@ -131,19 +163,27 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">No PR/IP</label>
-                                <!-- <div id="summernote-editor">
-                                    <p>Uraian Details</p>
-                                </div> end summernote-editor -->
-                                <input type="text" name="no_pr_ip" class="form-control" placeholder="Please insert pr/ip">
+                                <input type="text" name="no_pr_ip" class="form-control" placeholder="Please insert nomor pr/ip">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
+                                <label for="exampleInputEmail1">Tanggal PR/IP</label>
+                                <input type="date" class="form-control" placeholder="Please insert start date" name="date_pr">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
                                 <label for="exampleInputEmail1">No Justifikasi</label>
-                                <!-- <div id="summernote-editor">
-                                    <p>Uraian Details</p>
-                                </div> end summernote-editor -->
                                 <input type="text" name="no_justifikasi" class="form-control" placeholder="Please insert nomor justifikasi">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Tanggal Justifikasi</label>
+                                <input type="date" class="form-control" placeholder="Please insert start date" name="date_justifikasi">
                             </div>
                         </div>
                     </div>
@@ -151,12 +191,17 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">No RAB</label>
-                                <!-- <div id="summernote-editor">
-                                    <p>Uraian Details</p>
-                                </div> end summernote-editor -->
                                 <input type="text" name="no_rab" class="form-control" placeholder="Please insert nomor rab">
                             </div>
                         </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Tanggal RAB</label>
+                                <input type="date" class="form-control" placeholder="Please insert start date" name="date_rab">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">No KAK</label>
@@ -166,47 +211,10 @@
                                 <input type="text" name="no_kak" class="form-control" placeholder="Please insert nomor kak">
                             </div>
                         </div>
-                    </div>
-                    <div class="timeline">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Nilai PR</label>
-                                    <!-- <select class="form-control" name="test">
-                                    <option value="1">2022</option>
-                                    <option value="2">2023</option>
-                                </select> -->
-                                    <input type="text" class="form-control" placeholder="Please insert nilai_pr" name="nilai_pr">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Type TAX</label>
-                                    <select class="form-control" name="type_tax">
-                                        <option value="1">Pajak Dipungut, Pajak Dipungut Sebagian, Tidak Dipungut</option>
-                                        <option value="2">Pajak Dipungut (11% dari PR)</option>
-                                        <option value="3">Pajak Dipungut Sebgaian (Input Manual)</option>
-                                    </select>
-                                    <!-- <input type="text" class="form-control" placeholder="Please insert pbj" name="jenis_kontrak"> -->
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Nilai TAX</label>
-                                    <!-- <select class="form-control" name="test">
-                                    <option value="1">2022</option>
-                                    <option value="2">2023</option>
-                                </select> -->
-                                    <input type="text" class="form-control" placeholder="Please insert nilai tax" name="nilai_tax">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Keterangan</label>
-                                    <textarea class="form-control" placeholder="Please insert keterangan" name="keterangan"></textarea>
-                                </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Tanggal KAK</label>
+                                <input type="date" class="form-control" placeholder="Please insert start date" name="date_kak">
                             </div>
                         </div>
                     </div>
@@ -333,6 +341,15 @@
 
                 }
             })
+        })
+
+        $('body').on('click', '.type-tax', function() {
+            var jenis = $(this).val()
+            if (jenis == '3') {
+                $(".nilai-tax").show()
+            } else {
+                $(".nilai-tax").hide()
+            }
         })
 
         $('body').on('click', '.reject', function() {

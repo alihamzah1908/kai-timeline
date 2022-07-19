@@ -193,7 +193,7 @@
                                 <select class="form-control type-tax" name="type_tax">
                                     <option value="1">Pajak Tidak Dipungut</option>
                                     <option value="2">Pajak Dipungut</option>
-                                    <option value="3">Pajak Dipungut Sebgaian</option>
+                                    <option value="3">Pajak Dipungut Sebagian</option>
                                 </select>
                             </div>
                         </div>
