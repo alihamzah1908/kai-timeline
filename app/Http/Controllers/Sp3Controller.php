@@ -177,6 +177,7 @@ class Sp3Controller extends Controller
         $sp3 = \App\Models\SP3::orderBy('sp3_id', 'desc');
         if ($request["timeline_type"] == 'approval') {
             $sp3->where('proses_st', 'PROSES_ST');
+            $sp3->orWhere('proses_st', 'PROSES_AT');
         }
         $data = $sp3->get();
         return Datatables::of($data)
@@ -218,7 +219,7 @@ class Sp3Controller extends Controller
             ->addColumn('action', function ($row) {
                 $check = \App\Models\EvaluasiSp3::where('sp3_id', $row->sp3_id)->get();
                 if ($check->count() > 0) {
-                    $action = '<a class="dropdown-item show-evaluasi" role="presentation" href="javascript:void(0)" data-bind=' . $row->sp3_id . '> <i class="uil uil-eye"></i> Show Evaluasi</a>
+                    $action = '<a class="dropdown-item show-evaluasi" role="presentation" href="' . route('evaluasi.sp3') . '?sp_id=' . $row->sp3_id . '"> <i class="uil uil-eye"></i> Show Evaluasi</a>
                                <a class="dropdown-item approve" role="presentation" href="javascript:void(0)" data-bind=' . $row->sp3_id . '> <i class="uil uil-check"></i> Approve</a>
                                <a class="dropdown-item reject" role="presentation" href="javascript:void(0)" data-bind=' . $row->sp3_id . '> <i class="uil uil-multiply"></i> Reject</a>';
                 } else {
@@ -234,6 +235,18 @@ class Sp3Controller extends Controller
                             </button>
                             <div class="dropdown-menu" role="menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 28px, 0px); top: 0px; left: 0px; will-change: transform;">
                                 ' . $action . '
+                            </div>
+                        </div>';
+                } elseif ($row->proses_st == 'PROSES_AT') {
+                    $btn = '<div class="dropdown">
+                            <button class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="true" type="button">Action
+                                <i class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down">
+                                        <polyline points="6 9 12 15 18 9"></polyline>
+                                    </svg></i>
+                                <div></div>
+                            </button>
+                            <div class="dropdown-menu" role="menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 28px, 0px); top: 0px; left: 0px; will-change: transform;">
+                                <a class="dropdown-item reject" role="presentation" href="javascript:void(0)"> <i class="uil uil-print"></i> Print SP </a>
                             </div>
                         </div>';
                 } else {

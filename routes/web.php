@@ -85,4 +85,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/sp-3/list-sp-3', function () {
         return view('sp-3.list-sp3.index');
     })->name('list.sp3');
+    Route::get('/sp-3/evaluasi/detail', function () {
+        return view('sp-3.evaluasi.sp');
+    })->name('evaluasi.sp3');
 });
