@@ -40,10 +40,10 @@
                                 <th>Start Pengadaan</th>
                                 <th>End Pengadaan</th>
                                 <th>Status</th>
+                                <!-- <th></th>
                                 <th></th>
                                 <th></th>
-                                <th></th>
-                                <th></th>
+                                <th></th> -->
                                 <!-- <th></th> -->
                             </tr>
                         </thead>
@@ -175,7 +175,7 @@
                                     <option value="2">2</option>
                                     <option value="3">3</option>
                                     <option value="4">4</option>
-                                    <option value="4">4</option>
+                                    <option value="5">5</option>
                                 </select>
                             </div>
                         </div>
@@ -423,32 +423,42 @@
                 $(".nilai-tax-value").prop('disabled', true)
             } else if (jenis == '2') {
                 var persen = (11 / 100);
-                var total = parseInt(new_nilai_pr) * persen
-                var totalFix = parseInt(new_nilai_pr) - total
-                const format = totalFix.toString().split('').reverse().join('');
+                var tax = parseInt(new_nilai_pr) * persen
+                var pr = parseInt(new_nilai_pr)
+                const format = pr.toString().split('').reverse().join('');
                 const convert = format.match(/\d{1,3}/g);
                 const rupiah = convert.join('.').split('').reverse().join('')
                 $(".nilai-tax").show()
-                $(".nilai-tax-value").val('11')
-                $(".nilai-tax-insert").val('11')
+                //$(".nilai-tax-value").val('11')
+                $(".nilai-tax-value").val(tax)
+                //$(".nilai-tax-insert").val('11')
+                $(".nilai-tax-insert").val(tax)
                 $(".nilai-tax-percent").html('%')
                 $(".nilai-pr").val(rupiah)
                 $(".nilai-tax-value").prop('disabled', true)
             } else if (jenis == '3') {
+                var pr = parseInt(new_nilai_pr)
+                const format = pr.toString().split('').reverse().join('');
+                const convert = format.match(/\d{1,3}/g);
+                const rupiah = convert.join('.').split('').reverse().join('')
                 $(".nilai-tax").show()
                 $(".nilai-tax-value").prop('disabled', false)
-                $(".nilai-tax-value").val(' ')
-                $(".nilai-tax-insert").val(' ')
-                $(".nilai-pr").val(nilai_pr)
+                //$(".nilai-tax-value").val(' ')
+                $(".nilai-tax-value").val(tax)
+                //$(".nilai-tax-insert").val(' ')
+                $(".nilai-tax-insert").val(tax)
+                //$(".nilai-pr").val(nilai_pr)
+                $(".nilai-pr").val(rupiah)
             }
         })
         $('body').on('keyup', '.nilai-tax-value', function() {
             var persen = (parseInt($(this).val()) / 100)
             var nilai_pr = $(".nilai-pr").val()
             var new_nilai_pr = nilai_pr.replace(/\./g, '')
-            var hasil_kalkulasi = parseInt(new_nilai_pr) * persen;
-            var hasilFix = parseInt(new_nilai_pr) - parseInt(hasil_kalkulasi);
-            const format = hasilFix.toString().split('').reverse().join('');
+            //var hasil_kalkulasi = parseInt(new_nilai_pr) * persen;
+            //var hasilFix = parseInt(new_nilai_pr) - parseInt(hasil_kalkulasi);
+            //const format = hasilFix.toString().split('').reverse().join('');
+            const format = new_nilai_pr.toString().split('').reverse().join('');
             const convert = format.match(/\d{1,3}/g);
             const rupiah = convert.join('.').split('').reverse().join('')
             $('.nilai-pr').val(rupiah)

@@ -48,7 +48,8 @@ class TimelineController extends Controller
         $data->pbj = $request["pbj"];
         $data->nilai_pr = str_replace('.', '', $request["nilai_pr"]);
         $data->type_tax = $request["type_tax"];
-        $data->nilai_tax = $request["nilai_tax"];
+        //$data->nilai_tax = $request["nilai_tax"];
+        $data->nilai_tax = str_replace('.', '', $request["nilai_tax"]);
         $data->start_date_pengadaan = $request["start_date"];
         $data->end_date_pengadaan = $request["end_date"];
         $data->proses_st = $request["save"] == 'draft' ? 'PROSES_DT' : 'PROSES_ST';
@@ -143,19 +144,20 @@ class TimelineController extends Controller
         $data = $timeline->get();
         return Datatables::of($data)
             ->addColumn('nilai_pr', function ($row) {
-                return number_format($row->nilai_pr, 2);
+                return number_format($row->nilai_pr, 0);
             })
             ->addColumn('type_tax', function ($row) {
                 if ($row->type_tax == '1') {
                     return 'Pajak Tidak Dipungut';
                 } else if ($row->type_tax == '2') {
-                    return 'Pajak Dipungut (11%)';
+                    return 'Pajak Dipungut';
                 } else if ($row->type_tax == '3') {
                     return 'Pajak Dipungut Sebagian';
                 }
             })
             ->addColumn('nilai_tax', function ($row) {
-                return $row->nilai_tax . '%';
+                //return $row->nilai_tax . '';
+                return number_format($row->nilai_tax, 0);
             })
             ->addColumn('start_date_pengadaan', function ($row) {
                 return date('d M Y', strtotime($row->start_date_pengadaan));
@@ -164,9 +166,9 @@ class TimelineController extends Controller
                 return date('d M Y', strtotime($row->end_date_pengadaan));
             })
             ->addColumn('jenis_kontrak', function ($row) {
-                if ($row->type_tax == 'single_year') {
+                if ($row->jenis_kontrak == 'single_year') {
                     return 'SINGLE YEAR';
-                } else if ($row->type_tax == 'multi_year') {
+                } else if ($row->jenis_kontrak == 'multi_year') {
                     return 'MULTI YEAR';
                 }
             })

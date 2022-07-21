@@ -23,7 +23,7 @@
                                 <th>Directorate</th>
                                 <th>Division</th>
                                 <th>Department</th>
-                                <th>Relisasi</th>
+                                <th>Realisasi</th>
                                 <th>Judul Pengadaan</th>
                                 <th>Nilai PR</th>
                                 <th>Type Tax</th>
